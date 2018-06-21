@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="models.BeanUser" %>
 
-<script>
-$(document).ready(function(){
-    $("#registerForm").validate({
-    	submitHandler: function(form) {
-    		
-    		var test = validatePassword();
-    		if(test) {
-    			$('#content').load('RegisterController',$("#registerForm").serialize());
-    		}
-    }
-    });
-});
-
-</script>
-
 <% 
 BeanUser user = null;
 if (request.getAttribute("user")!=null) {
@@ -25,8 +10,6 @@ else {
 	user = new BeanUser();
 }
 %>
-
-
 
 <form class="w3-container" action="RegisterController" method="post" id="registerForm" style="color:rgb(0, 102, 153);">  
 
@@ -54,7 +37,7 @@ else {
  	  </div>
  	  
   		<div class="w3-section w3-center">   
-      <button  class ="w3-button w3-black" id="login-button" type="submit" value="Enviar" >Register</button>
+      <button  class ="w3-button w3-black" id="login-button" type="submit" value="Enviar" onclick="validatePassword()" >Register</button>
 		</div>
     </form>
 
@@ -67,12 +50,23 @@ else {
 
  <script>
  
+
+ 
+	$(document).ready(function(){
+	    $("#registerForm").validate({
+	    	submitHandler: function(form) {
+	    		$('#content').load('RegisterController',$("#registerForm").serialize());
+	    }
+	    });
+	});
+
+	
 	var Msg ='<%=user.getError()[0]%>';
 	var Msg2 ='<%=user.getError()[1]%>';
 	    if (Msg != "null" &&  Msg2 != "null") {
 	 function alertName(){
 		 swal("mail already or username in use");
-	 	} 
+	 } 
 	 }
 	
 	
@@ -82,12 +76,15 @@ else {
 			, confirm_password = document.getElementById("confirmPassword");
 			
 			
-			if(password.value != confirm_password.value) {
+			if(password.value != confirm_password.value) 
 				swal("password doest not match ");
-				return false;
-			}
-			return true;
+			 
+
 		}
+		
+
+	
+
     
 </script>
 </body>
