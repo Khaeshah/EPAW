@@ -190,7 +190,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	
 	function showProfile(event){
 		
-		$('#profile_modal').load('ProfileController',{content:event.innerHTML});
+		$('#profile_modal').load('ProfileController',{type:"other",content:event.innerHTML});
 		
 	}
 	
