@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
      */
     public SearchController() {
         super();
-        // test git
+        // test branch
         // TODO Auto-generated constructor stub
     }
 
