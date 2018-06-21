@@ -124,16 +124,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		    </div>
 		  </div> 
 	</div>
-		  
-		  
-    	<div class="w3-col" style="width:50%">
-		  
-				
-				 <jsp:include page="ViewSearch.jsp" />
-				    
-		
+        <div class="w3-col" style="width:50%">
+        <div class="w3-col" style="width:50%"> <a class="w3-bar-item">What do you want to search?</a> </div>
+
+            <jsp:include page="ViewSearch.jsp" />
+
+
 		</div>
-    
+
     <div class="w3-col" style="width:10%">
     	 
 		  <c:if test= "${not empty user}">

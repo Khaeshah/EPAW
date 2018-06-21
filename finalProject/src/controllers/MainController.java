@@ -34,7 +34,7 @@ public class MainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<BeanPost> postList = new ArrayList<BeanPost>();
+		ArrayList<BeanPost> postList = new ArrayList<>();
 		try {
 				ResultSet allPosts = PostUtils.getAllPosts();
 					
