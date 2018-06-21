@@ -43,7 +43,7 @@ public class ProfileController extends HttpServlet {
 		
 		String profilename = (String)request.getParameter("content");
 		BeanUser user = new BeanUser();
-		//hola
+		//holaasdas
 		try{
 				ResultSet db_user = UserUtils.getUser(profilename);
 				
