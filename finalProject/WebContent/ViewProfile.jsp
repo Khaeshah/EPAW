@@ -38,9 +38,6 @@
 		  	<img class= "image-cropper" src="https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" width="200" height="200"  alt="Computer Hope">
 		  </div>
 		</div>
-	
-		
-	
       </form>
     </div>
   </div>
