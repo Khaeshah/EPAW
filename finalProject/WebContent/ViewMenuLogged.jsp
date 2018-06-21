@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>
+    pageEncoding="UTF-8" session="true" import="models.BeanUser"%>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -9,19 +9,10 @@ $(document).ready(function() {
     
 	$(".menu2").click(function(event) {
 	    $('#profile_modal').show();
-	    console.log( $('#profile_modal').show());
 	    });
 });
 
 </script>
-
-
-<%
-	String user = "";
-	if(session.getAttribute("user") != null ){
-		user = session.getAttribute("user").toString();
-	}
-%>
 
 
  <div id= userinfo>
@@ -32,9 +23,9 @@ $(document).ready(function() {
         <div id=profile class="w3-display-container"> 
         
           <img class="profile" src="images/profile.png" height="40" width="40"> 
-          
-          <div id="user_name" class="w3-container w3-light-grey w3-center w3-section w3-round-small"> 
-      		${user}
+      
+          <div id="user_name" class="w3-container w3-light-grey w3-center w3-section w3-round-small"> ${userinfo.user} 
+      		
           <a class="menu" id="LogoutController" href="#"> <i class="fa fa-sign-out" style="float: right; font-size:24px; padding-right: 20px;"></i></a>
      	
           </div>

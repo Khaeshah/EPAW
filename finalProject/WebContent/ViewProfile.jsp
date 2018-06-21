@@ -11,7 +11,7 @@
 <div id="profile_modal" class="w3-modal">
 
     <div class="w3-modal-content">
-        <form  id="ProfileForm" class="w3-container w3-card-4" action="PostController" >
+        <form  id="ProfileForm" class="w3-container w3-card-4" action="ProfileController" >
         <span onclick="document.getElementById('profile_modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 		<br>
 		<p>

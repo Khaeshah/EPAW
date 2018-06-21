@@ -14,6 +14,9 @@ public class BeanUser implements Serializable  {
 	private String password = "";
 	private String confirmPassword = "";
 	private String description = "";
+	private String phoneNumber = "";
+	private String url = "";
+	private boolean is_admin = false;
 	private encryptionUtils md5 = new encryptionUtils();
 	
 	/*  Control which parameters have been correctly filled */
@@ -60,6 +63,38 @@ public class BeanUser implements Serializable  {
 	
 	public void setConfirmPassword(String password){
 		this.confirmPassword = this.password;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public boolean isIs_admin() {
+		return is_admin;
+	}
+
+	public void setIs_admin(boolean is_admin) {
+		this.is_admin = is_admin;
 	}
 	
 	/* Logic Functions */

@@ -9,7 +9,7 @@ public class Querys {
     }
 
     public static String getUserQueryFromName(String username){
-    	return "SELECT id, mail, username, password, description, phoneNumber FROM User WHERE username = '" + username + "';";
+    	return "SELECT * FROM User WHERE username = '" + username + "';";
     }
     
     public static String getUserQueryFromEmail(String mail){
