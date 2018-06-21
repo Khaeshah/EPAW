@@ -54,7 +54,7 @@ $(document).ready(function(){
 	 	</select>	 
 	 	</div>
 		<br>
-		<input type="datetime-local" name="eventime">
+		<input type="datetime-local" name="eventTime">
 		<p> <input class="w3-button w3-black" name="submit" type="submit" value="Enviar"> </p>
 		
 

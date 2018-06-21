@@ -13,13 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import models.BeanLogin;
 import models.BeanPost;
-import models.BeanUser;
-import utils.HtmlUtils;
 import utils.PostUtils;
-import utils.Querys;
-import utils.UserUtils;
 
 /**
  * Servlet implementation class MenuController
@@ -57,7 +52,7 @@ public class PostController extends HttpServlet {
 		
 		BeanPost post= new BeanPost();
 		post.setAuthor(user);
-		post.setPostime(time);
+		post.setTime(time);
 		RequestDispatcher dispatcher = null;
 		post.setLikes(0);
 	
@@ -69,8 +64,17 @@ public class PostController extends HttpServlet {
 			   
 			   if (post.isComplete()) {
 				  
-				   PostUtils.insertPost(post.getAuthor(),post.getTitle(),post.getContent(),post.getEventime(), post.getPlace(), post.getPostime(), post.getInterest());
-				   //System.out.println(Querys.insertPost(post.getAuthor(),post.getTitle(),post.getContent(),post.getEventime(),post.getPlace(), post.getPostime(), post.getInterest()));
+				   PostUtils.insertPost(
+				   		post.getAuthor(),
+						   post.getTitle(),
+						   post.getContent(),
+						   post.getEventTime(),
+						   post.getPlace(),
+						   post.getLikes(),
+						   post.getTime(),
+						   post.getInterest(),
+						   post.getIs_public());
+				   //System.out.println(Querys.insertPost(post.getAuthor(),post.getTitle(),post.getContent(),post.getEventTime(),post.getPlace(), post.getTime(), post.getInterest()));
 				   request.setAttribute("post",post);
 				   dispatcher.forward(request, response);
 			   } 

@@ -39,10 +39,10 @@ public class PostUtils {
     	return result;
     }
     */
-    public static void insertPost(String author, String title,  String content , String eventime, String place, String postime, String insterest) throws Exception {
+    public static void insertPost(String author, String title,  String content , String eventTime, String place, Integer likes, String time, String interest, Boolean isPublic) throws Exception {
     
     		DAO dao = new DAO();
-   	     	dao.execute(Querys.insertPost(author,title,content,eventime,place,postime,insterest));
+   	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place,likes, time,interest, isPublic));
 
     }
     

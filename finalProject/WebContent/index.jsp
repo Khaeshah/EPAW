@@ -159,8 +159,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${BeanPost.content}</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
-           <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanPost.author}</span>  posted ${BeanPost.postime}
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventTime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
+           <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanPost.author}</span>  posted ${BeanPost.time}
           <hr>
         </div>
         

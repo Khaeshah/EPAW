@@ -2,11 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.HtmlUtils;
 import utils.PostUtils;
-import utils.UserUtils;
 import models.BeanPost;
 
 /**
@@ -45,18 +39,20 @@ public class MainController extends HttpServlet {
 				ResultSet allPosts = PostUtils.getAllPosts();
 					
 					while (allPosts.next()){
-							
-							BeanPost post = new BeanPost();
-							post.setId(allPosts.getInt("id"));
-							post.setAuthor(allPosts.getString("author"));
-							post.setTitle(allPosts.getString("title"));
-							post.setContent(allPosts.getString("content"));
-							post.setEventime(allPosts.getString("eventime"));
-							post.setPlace(allPosts.getString("place"));
-							post.setLikes(allPosts.getInt("likes"));
-							post.setPostime(allPosts.getString("time"));
-					        postList.add(post);
-					    }
+
+						BeanPost post = new BeanPost();
+						post.setId(allPosts.getInt("id"));
+						post.setAuthor(allPosts.getString("author"));
+						post.setTitle(allPosts.getString("title"));
+						post.setContent(allPosts.getString("content"));
+						post.setEventTime(allPosts.getString("eventTime"));
+						post.setPlace(allPosts.getString("place"));
+						post.setLikes(allPosts.getInt("likes"));
+						post.setTime(allPosts.getString("time"));
+						post.setInterest(allPosts.getString("interest"));
+						post.setIs_public(allPosts.getBoolean("is_public"));
+						postList.add(post);
+					}
 			
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

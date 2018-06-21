@@ -2,11 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.HtmlUtils;
 import utils.PostUtils;
-import utils.UserUtils;
 import models.BeanPost;
 
 /**
@@ -53,10 +47,10 @@ public class SearchController extends HttpServlet {
 				post.setAuthor(allPosts.getString("author"));
 				post.setTitle(allPosts.getString("title"));
 				post.setContent(allPosts.getString("content"));
-				post.setEventime(allPosts.getString("eventime"));
+				post.setEventTime(allPosts.getString("eventime"));
 				post.setPlace(allPosts.getString("place"));
 				post.setLikes(allPosts.getInt("likes"));
-				post.setPostime(allPosts.getString("time"));
+				post.setTime(allPosts.getString("time"));
 		        postList.add(post);
 		    }
 		} catch (Exception e) {

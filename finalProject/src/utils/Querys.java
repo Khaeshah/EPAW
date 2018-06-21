@@ -38,8 +38,8 @@ public class Querys {
     
     
     // post 
-    public static String insertPost(  String author, String title, String content, String eventime, String place, String postime, String interest){
-        return "INSERT INTO Post VALUES (null, '" + author + "', '" + title + "','" + content + "'"+ ", '"+ eventime+ "', '"+place+"','0','"+postime+"','"+ interest+ "');";
+    public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){
+        return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"',"+likes+",'"+time+"','"+ interest+ "'," + is_public +");";
     }
     
     public static String getPostsQueryFromName(String Username){

@@ -11,16 +11,13 @@ public class BeanPost implements Serializable  {
 	private String author = "";
 	private String title = "";
 	private String content = "";
+	private String eventTime = "";
 	private String place = "";
-	private String eventime= "";
-	private String interest= "";
-
-
 	private int likes = 0;
-	private String postime ="";
-	
+	private String time ="";
+	private String interest= "";
+	private Boolean is_public = false;
 	/* Logic Functions */
-	
 
 
 	public String getAuthor() {
@@ -55,20 +52,20 @@ public class BeanPost implements Serializable  {
 		this.likes = likes;
 	}
 	
-	public String getEventime() {
-		return eventime;
+	public String getEventTime() {
+		return eventTime;
 	}
 
-	public void setEventime(String eventime) {
-		this.eventime = eventime;
+	public void setEventTime(String eventTime) {
+		this.eventTime = eventTime;
 	}
 
-	public String getPostime() {
-		return postime;
+	public String getTime() {
+		return time;
 	}
 
-	public void setPostime(String postime) {
-		this.postime = postime;
+	public void setTime(String time) {
+		this.time = time;
 	}
 	
 	public String getPlace() {
@@ -93,6 +90,14 @@ public class BeanPost implements Serializable  {
 
 	public void setInterest(String interest) {
 		this.interest = interest;
+	}
+
+	public Boolean getIs_public() {
+		return is_public;
+	}
+
+	public void setIs_public(Boolean is_public) {
+		this.is_public = is_public;
 	}
 
 	/*Check if all the fields are filled correctly */
