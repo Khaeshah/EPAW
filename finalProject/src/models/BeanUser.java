@@ -94,8 +94,9 @@ public class BeanUser implements Serializable  {
 		return is_admin;
 	}
 
-	public void setIs_admin(boolean is_admin) {
-		this.is_admin = is_admin;
+	public void setIs_admin(int is_admin) {
+		if(is_admin == 1) this.is_admin = true;
+		else this.is_admin = false;
 	}
 	
 	public String getProfilename() {
