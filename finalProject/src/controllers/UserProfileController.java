@@ -68,8 +68,9 @@ public class UserProfileController extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			
-		
-			//out.println("[{\"username\":"+user.getProfilename()+"},{\"description\":"+user.getDescription()+"},{\"url\":"+user.getUrl()+"}]");
+			
+
+			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"}]");
 
 		
 	}

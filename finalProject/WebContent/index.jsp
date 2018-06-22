@@ -202,14 +202,22 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	
 	
 	function showProfile(event){		
-		// request
+
+		
 		url ="http://localhost:8080/finalProject/UserProfileController"
 		$("#userProfile").show();
-		//$('#userProfile').load('UserProfileController',{type:"other",content:event.innerHTML});
+
 		$.post(url,{content:event.innerHTML},
 			function(response){
 			a = JSON.parse(response)
-			console.log(response);
+			console.log(a);
+			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
+			var description = document.getElementById("labe_description").innerHTML= a[1].description;
+			
+				if(a[2].url !="null")
+					var url = document.getElementById("user_profile").src= a[2].url;
+				else 
+					var url = document.getElementById("user_profile").src= "images/profile.png";
 			}
 		);
 

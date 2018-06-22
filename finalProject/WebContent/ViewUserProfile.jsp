@@ -27,24 +27,44 @@ System.out.println(user.getUser());
     <div class="w3-modal-content">
         <span onclick="document.getElementById('userProfile').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 		<br>
-		<p>
 		
 		<div class="w3-row ">
-		  <div class="w3-container w3-half ">
-		  	<p>
-			<label class="w3-text-grey">Username: </label>
-			</p> 
-			${user.user}
-			<p>      
-			<label class="w3-text-grey">Description: </label>
-			</p>
-			
-
-			<!-- <p> <input class="w3-button w3-black" name="submit" type="submit" value="save"> </p> -->
-		  </div>
+		
 		  <div class="w3-container w3-half">
-		  	<img class= "image-cropper" src="https://i.pinimg.com/originals/c9/df/ed/c9dfede10c5ee873384927b015bb6d06.jpg" width="200" height="400"  alt="Computer Hope">
+
+		  <br>
+			<ul class="w3-ul">
+			<div>Username:</div>
+	    	<li><label id="labe_username" class="w3-text-grey"></label></li>
+	    	
+	    	<div>Description:</div>
+	    	<li><label id="labe_description" class="w3-text-grey">Description: </label></li>
+	 		 </ul>
+
+		  	</div>
+		  	<div class="w3-container w3-half">
+		  	<img id=user_profile class= "image-cropper" src="" >
+		  	
+		  	
 		  </div>
 		</div>
+		
+		<h2 class="w3-round w3-teal w3-center w3-content" style="width:80%; margin-top:30px;">Post History</h2>
+		<hr>
+		<div id="profileposts" class="w3-container w3-round">
+		
+		<div id="user_post">
+        <h2  id="user_post_title" class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i></h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b  id="user_post_content"></b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
+          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
+          <hr>
+        </div>
+        </div>
+		
+		
+		</div>
+		
     </div>
   </div>

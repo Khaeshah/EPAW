@@ -73,7 +73,7 @@ public class MainController extends HttpServlet {
 						post.setAuthor(allPosts.getString("author"));
 						post.setTitle(allPosts.getString("title"));
 						post.setContent(allPosts.getString("content"));
-						post.setEventTime(allPosts.getString("eventTime"));
+						post.setEventTime(allPosts.getString("eventTime").replace("T", " "));
 						post.setPlace(allPosts.getString("place"));
 						post.setLikes(allPosts.getInt("likes"));
 						post.setTime(allPosts.getString("time"));
