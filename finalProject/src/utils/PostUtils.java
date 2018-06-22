@@ -2,6 +2,7 @@ package utils;
 
 import models.BeanPost;
 import models.DAO;
+import org.json.JSONObject;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -45,7 +46,8 @@ public class PostUtils {
             post.setContent(result.getString("content"));
             post.setEventTime(result.getString("eventTime"));
             post.setPlace(result.getString("place"));
-            post.setLikes(result.getInt("likes"));
+            String likes = result.getString("likes");
+            post.setLikes(likes != null ? new JSONObject(likes) : null);
             post.setTime(result.getString("time"));
             postList.add(post);
         }
@@ -79,9 +81,9 @@ public class PostUtils {
     	return result;
     }
     */
-    public static void insertPost(String author, String title,  String content , String eventTime, String place, Integer likes, String time, String interest, Boolean isPublic) throws Exception {
+    public static void insertPost(String author, String title, String content , String eventTime, String place, String time, String interest, Boolean isPublic) throws Exception {
     		DAO dao = new DAO();
-   	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place,likes, time,interest, isPublic));
+   	     	dao.execute(Querys.insertPost(author, title, content, eventTime, place, time, interest, isPublic));
     }
     
 }

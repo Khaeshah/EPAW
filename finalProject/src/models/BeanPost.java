@@ -1,5 +1,7 @@
 package models;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 
@@ -13,7 +15,8 @@ public class BeanPost implements Serializable  {
 	private String content = "";
 	private String eventTime = "";
 	private String place = "";
-	private int likes = 0;
+	private JSONObject comments;
+	private JSONObject likes;
 	private String time ="";
 	private String interest= "";
 	private Boolean is_public = false;
@@ -44,11 +47,11 @@ public class BeanPost implements Serializable  {
 		this.content = content;
 	}
 
-	public int getLikes() {
+	public JSONObject getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(JSONObject likes) {
 		this.likes = likes;
 	}
 	
@@ -100,7 +103,15 @@ public class BeanPost implements Serializable  {
 		this.is_public = is_public;
 	}
 
-	/*Check if all the fields are filled correctly */
+    public JSONObject getComments() {
+        return comments;
+    }
+
+    public void setComments(JSONObject comments) {
+        this.comments = comments;
+    }
+
+    /*Check if all the fields are filled correctly */
 	public boolean isComplete() {
 	    return(hasValue(getAuthor()) &&
 	           hasValue(getContent()));

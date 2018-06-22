@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 
 import encryption.encryptionUtils;
+import org.json.JSONObject;
 
 
 public class BeanUser implements Serializable  {
@@ -18,6 +19,7 @@ public class BeanUser implements Serializable  {
 	private String url = "";
 	private boolean is_admin = false;
 	private String profilename = "";
+	private JSONObject follow;
 	private encryptionUtils md5 = new encryptionUtils();
 	
 	/*  Control which parameters have been correctly filled */
@@ -105,7 +107,15 @@ public class BeanUser implements Serializable  {
 	public void setProfilename(String profilename) {
 		this.profilename = profilename;
 	}
-	
+
+	public JSONObject getFollow() {
+		return follow;
+	}
+
+	public void setFollow(JSONObject follow) {
+		this.follow = follow;
+	}
+
 	/* Logic Functions */
 	
 	/*Check if all the fields are filled correctly */
