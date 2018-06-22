@@ -165,7 +165,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	<div id="post${BeanPost.id}}">
       	<!-- TODO: Admin and user should be able to delete -->
       	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
-        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
+        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
         
         <div class="w3-container">
@@ -240,12 +240,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					var div = document.getElementById('user_post');
 				    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
 					clone.id = "post"+a[3][i][0].id+ +a[3][i][0].author;
-					document.getElementById("user_post_title").innerHTML = a[3][i][0].author;
+				    
+					clone.children[1].children[0].children[0].innerHTML = a[3][i][0].content;
+					
+					//clone.children[0].children[0].innerText =a[3][i][0].title;
+					clone.children[0].innerHTML += a[3][i][0].title+"   ||  "+a[3][i][0].interest;
+					
+					clone.children[1].children[1].children[0].innerHTML = a[3][i][0].eventime;
+	
+					//document.getElementById("user_post_title").innerHTML = a[3][i][0].author;
 					document.getElementById('profileposts').appendChild(clone);
 					
-					
-					
-				    
+			    
 				}
 				
 				
