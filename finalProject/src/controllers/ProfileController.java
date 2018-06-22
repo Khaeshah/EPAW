@@ -45,8 +45,6 @@ public class ProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String profilename = (String)request.getParameter("content");
-		String type = (String)request.getParameter("type");
 		BeanUser user = new BeanUser();
 		HttpSession session = request.getSession();
 		String oldusername = (String) session.getAttribute("user");
