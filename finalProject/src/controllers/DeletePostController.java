@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.BeanUser;
+import org.apache.commons.beanutils.BeanUtils;
+
+import models.BeanPost;
 import utils.PostUtils;
-import utils.UserUtils;
+import utils.Querys;
 
 /**
- * Servlet implementation class MenuController
+ * Servlet implementation class DeletePostController
  */
-@WebServlet("/MenuController")
-public class MenuController extends HttpServlet {
+@WebServlet("/DeletePostController")
+public class DeletePostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuController() {
+    public DeletePostController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +37,27 @@ public class MenuController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		
-		if (session.getAttribute("user")!=null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenuLogged.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenuNotLogged.jsp");
-			dispatcher.forward(request, response);
-		}
+
+		Integer id = Integer.parseInt(request.getParameter("postId").toString());
+
+		RequestDispatcher dispatcher = null;
+		   try {
+			   
+			   
+			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
+			   System.out.println(Querys.deletePost(id));
+			   if(id != -1) PostUtils.deletePost(id);
+
+			   request.setAttribute("id",id);
+			   dispatcher.forward(request, response);
+		   
+	
+		   } catch (Exception exception) {
+					if(dispatcher != null){
+						dispatcher.forward(request, response);
+					}
+
+				}
 	}
 
 	/**

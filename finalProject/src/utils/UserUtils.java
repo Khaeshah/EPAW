@@ -32,9 +32,9 @@ public class UserUtils {
         while (result.next()){
             BeanUser user = new BeanUser();
             user.setUser(result.getString("username"));
-            user.setUser(result.getString("mail"));
-            user.setUser(result.getString("description"));
-            user.setUser(result.getString("phoneNumber"));
+            user.setMail(result.getString("mail"));
+            //user.set(result.getString("description"));
+            //user.setUser(result.getString("phoneNumber"));
             userList.add(user);
         }
         return userList;
@@ -56,6 +56,13 @@ public class UserUtils {
     	DAO dao = new DAO();
     	result = dao.executeSQL(Querys.getUserQueryFromUsernameAndPassword(username, password));
     	return result;
+    }
+    
+    public static void UpdateUserFromName(String username, String url, String description, String newUsername) throws Exception {
+    	DAO dao = new DAO();
+    	
+    	dao.execute((Querys.UpdateUserFromName(username, url, description , newUsername)));
+    	
     }
 
     public static void insertUser(String username, String mail, String password) throws Exception {

@@ -57,6 +57,15 @@ public class PostUtils {
         result = dao.executeSQL(Querys.getAllPostInterest(interest));
         return result;
     }
+    
+    public static void deletePost(Integer id) throws Exception {
+        DAO dao = new DAO();
+    	dao.execute(Querys.deletePost(id));
+    	
+        //result = dao.executeSQL(Querys.deletePost(id));
+        //return result;
+    }
+    
     /*
     private static ResultSet checkMailAndUsername(String mail, String username) throws Exception {
     	DAO dao = new DAO();

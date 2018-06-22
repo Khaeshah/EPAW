@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true" %>
+    pageEncoding="UTF-8" session="true" import="models.BeanUser" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -33,6 +33,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			user = session.getAttribute("user").toString();
 		}
 
+	BeanUser userinfo = null;
+
+		if (request.getAttribute("userinfo")!=null) {
+			userinfo = (BeanUser)request.getAttribute("userinfo");
+		}
+		else {
+			userinfo = new BeanUser();
+		}
 %>
 
   <!-- Begin Wrapper -->
@@ -147,14 +155,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	   <jsp:include page="ViewPostModal.jsp" />
 	   
 	   <jsp:include page="ViewProfile.jsp"/>
+	   
+	   <jsp:include page="ViewUserProfile.jsp"/>
 	
       	<div id="Posts"  class="w3-container w3-card w3-white w3-margin-bottom">
       	
       	<c:forEach items="${postList}" var="BeanPost">
       	
       	<div id="post${BeanPost.id}}">
-      	
+      	<!-- TODO: Admin and user should be able to delete -->
+      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
+
+        
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${BeanPost.content}</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventTime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
@@ -188,10 +201,33 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	
-	function showProfile(event){
+	function showProfile(event){		
+
 		
-		$('#profile_modal').load('ProfileController',{type:"other",content:event.innerHTML});
-		
+		url ="http://localhost:8080/finalProject/UserProfileController"
+		$("#userProfile").show();
+
+		$.post(url,{content:event.innerHTML},
+			function(response){
+			a = JSON.parse(response)
+			console.log(a);
+			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
+			var description = document.getElementById("labe_description").innerHTML= a[1].description;
+			
+				if(a[2].url !="null")
+					var url = document.getElementById("user_profile").src= a[2].url;
+				else 
+					var url = document.getElementById("user_profile").src= "images/profile.png";
+			}
+		);
+
+					
+	}
+	
+	function deletePost(id) {
+		//$('#userProfile').load('ProfileController',{type:"other",content:event.innerHTML});
+		$('#wrapper').load('DeletePostController',{postId: id})
+		//alert("Post " + id + " Eliminado!");
 	}
 	
 	</script>
