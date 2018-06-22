@@ -32,9 +32,9 @@ public class UserUtils {
         while (result.next()){
             BeanUser user = new BeanUser();
             user.setUser(result.getString("username"));
-            user.setUser(result.getString("mail"));
-            user.setUser(result.getString("description"));
-            user.setUser(result.getString("phoneNumber"));
+            user.setMail(result.getString("mail"));
+            //user.set(result.getString("description"));
+            //user.setUser(result.getString("phoneNumber"));
             userList.add(user);
         }
         return userList;
