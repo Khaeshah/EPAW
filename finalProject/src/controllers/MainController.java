@@ -10,9 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import utils.PostUtils;
+import utils.Querys;
+import utils.UserUtils;
 import models.BeanPost;
+import models.BeanUser;
 
 /**
  * Servlet implementation class MainController
@@ -34,10 +38,34 @@ public class MainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<BeanPost> postList = new ArrayList<>();
+		ArrayList<BeanPost> postList = new ArrayList<BeanPost>();
+		
+		HttpSession session = request.getSession();
+		
+		String username = null;
+		BeanUser user = null;
+		ResultSet user_db = null;
+		
 		try {
+			
+				if(session.getAttribute("user")!=null)
+				username = (String) session.getAttribute("user");
+				user = new BeanUser();
+				user_db = UserUtils.getUser(username);
+				while (user_db.next()){
+			
+				user.setUser(user_db.getString("username"));
+				user.setMail((user_db.getString("mail")));
+				user.setPassword(user_db.getString("password"));
+				user.setUrl(user_db.getString("url"));
+				user.setDescription(user_db.getString("description"));
+				user.setIs_admin(user_db.getBoolean("is_admin"));
+				user.setPhoneNumber(user_db.getString("is_admin"));
+				user.setProfilename(user_db.getString("profilename"));
+				}
+		
 				ResultSet allPosts = PostUtils.getAllPosts();
-					
+		
 					while (allPosts.next()){
 
 						BeanPost post = new BeanPost();
@@ -51,17 +79,20 @@ public class MainController extends HttpServlet {
 						post.setTime(allPosts.getString("time"));
 						post.setInterest(allPosts.getString("interest"));
 						post.setIs_public(allPosts.getBoolean("is_public"));
+						
 						postList.add(post);
 					}
 			
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 			
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		request.setAttribute("postList",postList);
+		request.setAttribute("userinfo",user);
 		dispatcher.forward(request, response);	
 		}
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true" %>
+    pageEncoding="UTF-8" session="true" import="models.BeanUser" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -33,6 +33,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			user = session.getAttribute("user").toString();
 		}
 
+	BeanUser userinfo = null;
+
+		if (request.getAttribute("userinfo")!=null) {
+			userinfo = (BeanUser)request.getAttribute("userinfo");
+		}
+		else {
+			userinfo = new BeanUser();
+		}
 %>
 
   <!-- Begin Wrapper -->
