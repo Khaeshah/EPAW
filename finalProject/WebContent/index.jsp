@@ -154,6 +154,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	
 	   <jsp:include page="ViewPostModal.jsp" />
 	   
+	   <jsp:include page="ViewUserProfile.jsp" />
+	   
 	   <jsp:include page="ViewProfile.jsp"/>
 	
       	<div id="Posts"  class="w3-container w3-card w3-white w3-margin-bottom">
@@ -196,10 +198,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	
-	function showProfile(event){
-		
-		$('#profile_modal').load('ProfileController',{type:"other",content:event.innerHTML});
-		
+	function showProfile(event){		
+		// request
+		url ="http://localhost:8080/finalProject/UserProfileController"
+		$("#userProfile").show();
+		//$('#userProfile').load('UserProfileController',{type:"other",content:event.innerHTML});
+		$.post(url,{content:event.innerHTML},
+			function(response){
+			a = JSON.parse(response)
+			console.log(a);
+			}
+		);
+
+					
 	}
 	
 	</script>
