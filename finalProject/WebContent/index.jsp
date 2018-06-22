@@ -192,6 +192,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- End Page Container -->
 
 
+
+
+	<div id="user_post">
+        <h2  id="user_post_title" class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i></h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b  id="user_post_content"></b></h5>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
+          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
+          <hr>
+        </div>
+        </div>
+        
+        
 	<script>
 	
 	function sendButton(event){
@@ -210,7 +223,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		$.post(url,{content:event.innerHTML},
 			function(response){
 			a = JSON.parse(response)
-			console.log(a);
+
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
 			var description = document.getElementById("labe_description").innerHTML= a[1].description;
 			
@@ -218,7 +231,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					var url = document.getElementById("user_profile").src= a[2].url;
 				else 
 					var url = document.getElementById("user_profile").src= "images/profile.png";
+				
+			
+				var i;
+				for (i = 0; i < a[3].length; i++) { 
+					console.log(a[3][i][0]);
+					
+					var div = document.getElementById('user_post');
+				    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+					clone.id = "post"+a[3][i][0].id+ +a[3][i][0].author;
+					document.getElementById("user_post_title").innerHTML = a[3][i][0].author;
+					document.getElementById('profileposts').appendChild(clone);
+					
+					
+					
+				    
+				}
+				
+				
 			}
+		
+
 		);
 
 					

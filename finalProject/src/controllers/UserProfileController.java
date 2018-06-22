@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import utils.HtmlUtils;
 import utils.PostUtils;
+import utils.Querys;
 import utils.UserUtils;
 import models.BeanPost;
 import models.BeanUser;
@@ -46,7 +50,10 @@ public class UserProfileController extends HttpServlet {
 		
 			String username = (String)request.getParameter("content");
 			BeanUser user = null;
-			ArrayList<BeanPost> postList = new ArrayList<BeanPost>();
+			String allpost ="";
+			
+			StringBuilder stringBuilder = new StringBuilder();
+
 			try {
 					ResultSet user_bd = UserUtils.getUser(username);
 					
@@ -60,22 +67,46 @@ public class UserProfileController extends HttpServlet {
 					user.setProfilename(user_bd.getString("profilename"));
 					}
 					
+				
 					ResultSet allPosts = PostUtils.getPostsFromUser(username);
+					stringBuilder.append("[");
+					
+		
 					while (allPosts.next()){
-
-						BeanPost post = new BeanPost();
-						post.setId(allPosts.getInt("id"));
-						post.setAuthor(allPosts.getString("author"));
-						post.setTitle(allPosts.getString("title"));
-						post.setContent(allPosts.getString("content"));
-						post.setEventTime(allPosts.getString("eventTime").replace("T", " "));
-						post.setPlace(allPosts.getString("place"));
-						post.setLikes(allPosts.getInt("likes"));
-						post.setTime(allPosts.getString("time"));
-						post.setInterest(allPosts.getString("interest"));
-						post.setIs_public(allPosts.getBoolean("is_public"));
+				
 						
-						postList.add(post);
+						stringBuilder.append("[{");
+						stringBuilder.append("\"id\""+":\""+allPosts.getInt("id")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"author\""+":\""+allPosts.getString("author")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"title\""+":\""+allPosts.getString("title")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"eventime\""+":\""+allPosts.getString("eventTime").replace("T", " ")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"place\""+":\""+allPosts.getString("place")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"likes\""+":\""+allPosts.getInt("likes")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"time\""+":\""+allPosts.getString("time")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"interest\""+":\""+allPosts.getString("interest")+"\"");
+						stringBuilder.append(",");
+						stringBuilder.append("\"is_public\""+":\""+allPosts.getBoolean("is_public")+"\"");
+						stringBuilder.append("}],");
+					
+						//json.put("id",allPosts.getInt("id"));
+						//json.put("author",allPosts.getString("author"));
+						//json.put("title",allPosts.getString("title"));
+						//json.put("eventime",allPosts.getString("eventTime").replace("T", " "));
+						//json.put("place",allPosts.getString("place"));
+						//json.put("likes",allPosts.getInt("likes"));
+						//json.put("time",allPosts.getString("time"));
+						//json.put("interest",allPosts.getString("interest"));
+						//json.put("is_public",allPosts.getBoolean("is_public"));
+						
+					
+						
 					}
 
 				
@@ -85,10 +116,13 @@ public class UserProfileController extends HttpServlet {
 			}
 			
 			PrintWriter out = response.getWriter();
+			String finalString = stringBuilder.toString();
+			if (finalString.endsWith(",")) {
+				finalString = finalString.substring(0, finalString.length() - 1);
+				}
+			finalString = finalString+ "]";
 			
-			
-
-			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"}]");
+			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"},"+finalString+"]");
 
 		
 	}
