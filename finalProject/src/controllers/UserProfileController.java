@@ -46,10 +46,10 @@ public class UserProfileController extends HttpServlet {
 		
 			String username = (String)request.getParameter("content");
 			BeanUser user = null;
-			
+			ArrayList<BeanPost> postList = new ArrayList<BeanPost>();
 			try {
 					ResultSet user_bd = UserUtils.getUser(username);
-				
+					
 					user = new BeanUser();
 					
 					while (user_bd.next()){
@@ -58,6 +58,24 @@ public class UserProfileController extends HttpServlet {
 					user.setUrl(user_bd.getString("url"));
 					user.setDescription(user_bd.getString("description"));				
 					user.setProfilename(user_bd.getString("profilename"));
+					}
+					
+					ResultSet allPosts = PostUtils.getPostsFromUser(username);
+					while (allPosts.next()){
+
+						BeanPost post = new BeanPost();
+						post.setId(allPosts.getInt("id"));
+						post.setAuthor(allPosts.getString("author"));
+						post.setTitle(allPosts.getString("title"));
+						post.setContent(allPosts.getString("content"));
+						post.setEventTime(allPosts.getString("eventTime").replace("T", " "));
+						post.setPlace(allPosts.getString("place"));
+						post.setLikes(allPosts.getInt("likes"));
+						post.setTime(allPosts.getString("time"));
+						post.setInterest(allPosts.getString("interest"));
+						post.setIs_public(allPosts.getBoolean("is_public"));
+						
+						postList.add(post);
 					}
 
 				
