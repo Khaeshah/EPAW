@@ -53,17 +53,7 @@ System.out.println(user.getUser());
 		<hr>
 		<div id="profileposts" class="w3-container w3-round">
 		
-		<div id="user_post">
-        <h2  id="user_post_title" class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i></h2>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b  id="user_post_content"></b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
-          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
-          <hr>
-        </div>
-        </div>
-		
-		
+
 		</div>
 		
     </div>

@@ -52,7 +52,7 @@ public class Querys {
     }
     
     public static String getPostsQueryFromName(String Username){
-        return "SELECT * FROM Post where author = ; '"+ Username +  "' ";
+        return "SELECT * FROM Post where author = '"+ Username +  "' ";
     }
     
     public static String getAllPosts(){
