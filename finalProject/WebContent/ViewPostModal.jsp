@@ -18,9 +18,6 @@ $(document).ready(function(){
     }
 });
 
-
-
-
 </script>
 
 <div id="id01" class="w3-modal">

@@ -37,24 +37,14 @@ public class DeletePostController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//HttpSession session = request.getSession();
+
 		Integer id = Integer.parseInt(request.getParameter("postId").toString());
-		//if(session.getAttribute("id") != null ){
-			//id = Integer.parseInt(session.getAttribute("id").toString());
-		//}
-		
-		
-		/*BeanPost post= new BeanPost();
-		post.setAuthor(user);
-		post.setTime(time);
-		RequestDispatcher dispatcher = null;
-		post.setLikes(0);*/
-	
+
 		RequestDispatcher dispatcher = null;
 		   try {
 			   
-			   //BeanUtils.populate(post, request.getParameterMap());
-			   dispatcher = request.getRequestDispatcher("index.jsp");
+			   
+			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   System.out.println(Querys.deletePost(id));
 			   if(id != -1) PostUtils.deletePost(id);
 

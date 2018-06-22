@@ -208,7 +208,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	function deletePost(id) {
 		//$('#userProfile').load('ProfileController',{type:"other",content:event.innerHTML});
 		$('#wrapper').load('DeletePostController',{postId: id})
-		alert("Post " + id + " Eliminado!");
+		//alert("Post " + id + " Eliminado!");
 	}
 	
 	</script>

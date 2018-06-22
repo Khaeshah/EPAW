@@ -58,10 +58,12 @@ public class PostUtils {
         return result;
     }
     
-    public static ResultSet deletePost(Integer id) throws Exception {
+    public static void deletePost(Integer id) throws Exception {
         DAO dao = new DAO();
-        result = dao.executeSQL(Querys.deletePost(id));
-        return result;
+    	dao.execute(Querys.deletePost(id));
+    	
+        //result = dao.executeSQL(Querys.deletePost(id));
+        //return result;
     }
     
     /*
