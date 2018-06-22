@@ -15,6 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanPost;
 import utils.PostUtils;
+import utils.Querys;
 
 /**
  * Servlet implementation class DeletePostController
@@ -54,9 +55,9 @@ public class DeletePostController extends HttpServlet {
 			   
 			   //BeanUtils.populate(post, request.getParameterMap());
 			   dispatcher = request.getRequestDispatcher("index.jsp");
-			   
+			   System.out.println(Querys.deletePost(id));
 			   if(id != -1) PostUtils.deletePost(id);
-			   
+
 			   request.setAttribute("id",id);
 			   dispatcher.forward(request, response);
 		   
