@@ -55,13 +55,9 @@ public class UserProfileController extends HttpServlet {
 					while (user_bd.next()){
 				
 					user.setUser(user_bd.getString("username"));
-					user.setMail((user_bd.getString("mail")));
-					user.setPassword(user_bd.getString("password"));
-					//user.setUrl(user_bd.getString("url"));
-					//user.setDescription(user_bd.getString("description"));
-					//user.setIs_admin(user_bd.getBoolean("is_admin"));
-					//user.setPhoneNumber(user_bd.getString("is_admin"));
-					//user.setProfilename(user_bd.getString("profilename"));
+					user.setUrl(user_bd.getString("url"));
+					user.setDescription(user_bd.getString("description"));				
+					user.setProfilename(user_bd.getString("profilename"));
 					}
 
 				
@@ -73,7 +69,7 @@ public class UserProfileController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 		
-			out.println("[{\"canedit\":true},{\"asd\":false}]");
+			//out.println("[{\"username\":"+user.getProfilename()+"},{\"description\":"+user.getDescription()+"},{\"url\":"+user.getUrl()+"}]");
 
 		
 	}

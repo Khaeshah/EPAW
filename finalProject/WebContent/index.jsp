@@ -206,7 +206,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		$.post(url,{content:event.innerHTML},
 			function(response){
 			a = JSON.parse(response)
-			console.log(a);
+			console.log(response);
 			}
 		);
 
