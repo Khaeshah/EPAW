@@ -179,7 +179,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 		</c:if>
       	-->
-      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
+      	
+      	<!-- Delete posts -->
+      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>   
+      	
+      	<!-- Edit posts -->   	
+      	<span onclick="editPost(${BeanPost.id})" class="w3-button" >■</span>
+      	
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
 
      
@@ -232,9 +238,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	function deletePost(id) {
-		//$('#userProfile').load('ProfileController',{type:"other",content:event.innerHTML});
 		$('#wrapper').load('DeletePostController',{postId: id})
-		//alert("Post " + id + " Eliminado!");
+	}
+	
+	function editPost(id,title,content) {
+		System.out.println(title);
+		$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
 	</script>
