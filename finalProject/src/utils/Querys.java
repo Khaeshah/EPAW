@@ -74,5 +74,11 @@ public class Querys {
     public static String getAllPublicPostInterest(String interest){
         return "SELECT * FROM Post where interest = '"+interest+"' AND is_public = true ORDER BY time DESC;";
     }
+    
+    // Deletes
+    
+    public static String deletePost(Integer id){
+    	return "DELETE FROM Post WHERE id = "+ id +";";
+    }
 }
 
