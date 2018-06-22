@@ -11,6 +11,10 @@ public class Querys {
     public static String getUserQueryFromName(String username){
     	return "SELECT * FROM User WHERE username = '" + username + "';";
     }
+
+    public static String getUsersLikeQuery(String name){
+        return "SELECT * FROM User WHERE username like '%" + name + "%';";
+    }
     
     public static String getUserQueryFromEmail(String mail){
     	return "SELECT id, mail, username, password, description, phoneNumber FROM User WHERE mail = '" + mail + "';";
@@ -54,10 +58,21 @@ public class Querys {
     public static String getAllPosts(){
         return "SELECT * FROM Post ORDER BY time DESC;";
     }
-    
-    public static String gettAllPostInterest (String interest){
-    	  return "SELECT * FROM Post where interest = '"+interest+"' ORDER BY time DESC;";
+
+    public static String getAllPublicPosts(){
+        return "SELECT * FROM Post WHERE is_public = true ORDER BY time DESC;";
     }
     
+    public static String getAllPostInterest(String interest){
+    	  return "SELECT * FROM Post where interest = '"+interest+"' ORDER BY time DESC;";
+    }
+
+    public static String getAllPostFromContentLike(String content){
+        return "SELECT * FROM Post where content like '%"+ content +"%' ORDER BY time DESC;";
+    }
+
+    public static String getAllPublicPostInterest(String interest){
+        return "SELECT * FROM Post where interest = '"+interest+"' AND is_public = true ORDER BY time DESC;";
+    }
 }
 

@@ -74,7 +74,6 @@ public class PostController extends HttpServlet {
 						   post.getTime(),
 						   post.getInterest(),
 						   post.getIs_public());
-				   //System.out.println(Querys.insertPost(post.getAuthor(),post.getTitle(),post.getContent(),post.getEventTime(),post.getPlace(), post.getTime(), post.getInterest()));
 				   request.setAttribute("post",post);
 				   dispatcher.forward(request, response);
 			   } 

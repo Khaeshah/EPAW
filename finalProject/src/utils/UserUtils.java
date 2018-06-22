@@ -1,8 +1,11 @@
 package utils;
 
+import models.BeanUser;
 import models.DAO;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserUtils {
 	
@@ -19,6 +22,22 @@ public class UserUtils {
         DAO dao = new DAO();
         result = dao.executeSQL(Querys.getUserQueryFromName(name));
         return result;
+    }
+
+    public static List<BeanUser> getUsersLike(String name) throws Exception {
+        DAO dao = new DAO();
+        result = dao.executeSQL(Querys.getUsersLikeQuery(name));
+        List<BeanUser> userList = new ArrayList<>();
+
+        while (result.next()){
+            BeanUser user = new BeanUser();
+            user.setUser(result.getString("username"));
+            user.setMail(result.getString("mail"));
+            //user.set(result.getString("description"));
+            //user.setUser(result.getString("phoneNumber"));
+            userList.add(user);
+        }
+        return userList;
     }
     
     public static ResultSet checkMail(String mail) throws Exception {
