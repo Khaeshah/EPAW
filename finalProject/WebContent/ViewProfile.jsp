@@ -5,6 +5,13 @@
 
 <script>
 
+$(document).ready(function(){
+    $("#ProfileForm").validate({
+    	submitHandler: function(form) {
+    		$("#wrapper").load('ProfileController',$("#ProfileForm").serialize());
+    }
+    });
+});
 
 </script>
 
@@ -20,22 +27,22 @@
 		  <div class="w3-container w3-half ">
 		  	<p>
 			<label class="w3-text-grey">username</label>
-			<input class="w3-input w3-border " name="title" type="text" required>
+			<textarea class="w3-input w3-border " name="user" style="resize:none">${userinfo.profilename}</textarea>
 			</p>
 			<p>      
 			<label class="w3-text-grey">Description</label>
-			<textarea class="w3-input w3-border" name="description" style="resize:none"></textarea>
+			<textarea class="w3-input w3-border" name="description" style="resize:none">${userinfo.description}</textarea>
 			</p>
 			<p>
-		    <label class="w3-text-grey">image url</label>
-		    <input class="w3-input w3-border " name="url" type="text" style="heigh:110%;" required>
+		    <label class="w3-text-grey">image url </label>
+		    <textarea class="w3-input w3-border " name="url" style="resize:none">${userinfo.url}</textarea>
 		    </p>
 
 			<p> <input class="w3-button w3-black" name="submit" type="submit" value="save"> </p>
 			
 		  </div>
 		  <div class="w3-container w3-half">
-		  	<img class= "image-cropper" src="https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg" width="200" height="200"  alt="Computer Hope">
+		  	<img class= "image-cropper" src="${userinfo.url}" width="200" height="200">
 		  </div>
 		</div>
       </form>

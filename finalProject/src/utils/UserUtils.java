@@ -38,6 +38,13 @@ public class UserUtils {
     	result = dao.executeSQL(Querys.getUserQueryFromUsernameAndPassword(username, password));
     	return result;
     }
+    
+    public static void UpdateUserFromName(String username, String url, String description, String newUsername) throws Exception {
+    	DAO dao = new DAO();
+    	
+    	dao.execute((Querys.UpdateUserFromName(username, url, description , newUsername)));
+    	
+    }
 
     public static void insertUser(String username, String mail, String password) throws Exception {
 		if(!checkMailAndUsername(mail, username).next()){

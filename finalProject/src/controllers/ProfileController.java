@@ -14,9 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 import utils.HtmlUtils;
 import utils.PostUtils;
+import utils.Querys;
 import utils.UserUtils;
 import models.BeanPost;
 import models.BeanUser;
@@ -43,18 +47,36 @@ public class ProfileController extends HttpServlet {
 		
 		String profilename = (String)request.getParameter("content");
 		BeanUser user = new BeanUser();
-		//holaasdas
+		HttpSession session = request.getSession();
+		String oldusername = (String) session.getAttribute("user");
+		
 		try{
-				ResultSet db_user = UserUtils.getUser(profilename);
+			
+				BeanUtils.populate(user, request.getParameterMap());
+				UserUtils.UpdateUserFromName(oldusername,user.getUrl(), user.getDescription(), user.getUser());
 				
-				//post.setId(user_info.getInt("id"));		       
-		  
+				
+				ResultSet user_db = UserUtils.getUser(oldusername);
+				while (user_db.next()){
+			
+				user.setUser(user_db.getString("username"));
+				user.setMail((user_db.getString("mail")));
+				user.setPassword(user_db.getString("password"));
+				user.setUrl(user_db.getString("url"));
+				user.setDescription(user_db.getString("description"));
+				user.setIs_admin(user_db.getBoolean("is_admin"));
+				user.setPhoneNumber(user_db.getString("is_admin"));
+				user.setProfilename(user_db.getString("profilename"));
+				
+				}
+					
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewProfile.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		request.setAttribute("userinfo",user);
 		dispatcher.forward(request, response);	
 		

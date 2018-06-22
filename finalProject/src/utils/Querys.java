@@ -25,17 +25,22 @@ public class Querys {
     }
 
     public static String insertUserQuery(String username, String mail, String password){
-        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', null, null, null, FALSE);";
+        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', null, null, null, FALSE, '"+username+"');";
     }
 
     public static String insertUserQuery(String username, String mail, String description, String password){
-        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', '"+ description +"', null, null, FALSE);";
+        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', '"+ description +"', null, null, FALSE, '"+username+"');";
     }
 
     public static String insertUserQuery(String username, String mail, String password, String description, String phoneNumber){
-        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', '"+ description +"', '" + phoneNumber + "', null, FALSE);";
+        return "INSERT INTO User VALUES (null, '" + username + "','" + mail + "','" + password + "', '"+ description +"', '" + phoneNumber + "', null, FALSE, '"+username+"');";
     }
     
+    //update user 
+    
+    public static String UpdateUserFromName(String username, String url, String description, String newUsername){
+    	return "UPDATE user SET profilename ='"+newUsername+"', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
+    }
     
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){

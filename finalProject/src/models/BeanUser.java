@@ -17,6 +17,7 @@ public class BeanUser implements Serializable  {
 	private String phoneNumber = "";
 	private String url = "";
 	private boolean is_admin = false;
+	private String profilename = "";
 	private encryptionUtils md5 = new encryptionUtils();
 	
 	/*  Control which parameters have been correctly filled */
@@ -95,6 +96,14 @@ public class BeanUser implements Serializable  {
 
 	public void setIs_admin(boolean is_admin) {
 		this.is_admin = is_admin;
+	}
+	
+	public String getProfilename() {
+		return profilename;
+	}
+
+	public void setProfilename(String profilename) {
+		this.profilename = profilename;
 	}
 	
 	/* Logic Functions */

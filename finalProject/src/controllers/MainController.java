@@ -49,7 +49,7 @@ public class MainController extends HttpServlet {
 		try {
 			
 				if(session.getAttribute("user")!=null)
-					username = (String) session.getAttribute("user");
+				username = (String) session.getAttribute("user");
 				user = new BeanUser();
 				user_db = UserUtils.getUser(username);
 				while (user_db.next()){
@@ -61,6 +61,7 @@ public class MainController extends HttpServlet {
 				user.setDescription(user_db.getString("description"));
 				user.setIs_admin(user_db.getBoolean("is_admin"));
 				user.setPhoneNumber(user_db.getString("is_admin"));
+				user.setProfilename(user_db.getString("profilename"));
 				}
 		
 				ResultSet allPosts = PostUtils.getAllPosts();
@@ -78,6 +79,7 @@ public class MainController extends HttpServlet {
 						post.setTime(allPosts.getString("time"));
 						post.setInterest(allPosts.getString("interest"));
 						post.setIs_public(allPosts.getBoolean("is_public"));
+						
 						postList.add(post);
 					}
 			
