@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true" import="models.BeanUser" %>
+    pageEncoding="UTF-8" session="true" import="models.BeanUser, models.BeanPost" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -47,6 +47,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		else {
 			userinfo = new BeanUser();
 		}
+		
+	BeanPost postinfo = null;
+	if(request.getAttribute("post") != null) {
+		
+	}
+	
 %>
 
   <!-- Begin Wrapper -->
@@ -182,11 +188,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	-->
       	
       	<!-- Delete posts -->
-
+		<c:if test="${BeanPost.author eq user}">
       	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
+      	</c:if>
+      	
+      	<!-- Edit posts -->  
+      	<c:if test="${BeanPost.author eq user}"> 	
+      	<span onclick="editPost(${BeanPost.id})" class="w3-button" id="bEditPost">■</span>
+      	</c:if>  
+      	   	
+      	
+      	
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
-     
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${BeanPost.content}</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventTime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
@@ -314,20 +328,28 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 				
 				
 			}
-		
-
-		);
-
-					
+		);		
 	}
 	
 	function deletePost(id) {
 		$('#wrapper').load('DeletePostController',{postId: id})
 	}
 	
-	function editPost(id,title,content) {
-		System.out.println(title);
-		$('#wrapper').load('EditPostController',{postId: id})
+	function editPost(id) {
+		postide = "post" + id + "}";
+		a = document.getElementById(postide);
+		
+		// Obtenim el titol
+		title = a.children[2].innerText.split('|')[0];
+		// Obtenim el contingut
+		content = a.children[3].children[0].innerText;
+		
+		document.getElementById("idPost").innerText = id;
+		document.getElementById("titlePost").innerText = title;
+		document.getElementById("contentPost").innerText = content;
+		$('#post_modal').show();
+		
+		//$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
 	  

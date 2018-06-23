@@ -46,6 +46,12 @@ public class Querys {
     	return "UPDATE user SET profilename ='"+newUsername+"', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
     }
     
+    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    }
+    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
+    
+    }
+
     //follow 
     public static String insertFollow(String user1 , String user2){
         return "INSERT INTO follow VALUES ('"+ user1 + "','"+user2+"');";
@@ -60,6 +66,14 @@ public class Querys {
     }
     
     
+=======
+    // update post
+    
+    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
+    }
+    
+>>>>>>> finalProject/src/utils/Querys.java
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){
         return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"',"+likes+",'"+time+"','"+ interest+ "'," + is_public +");";
