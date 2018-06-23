@@ -134,8 +134,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div id="search_bar" class="w3-bar w3-black ">
     
     
-    <div class="w3-col" style="width:20%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
-    <div class="w3-col" style="width:20%">  <div class="w3-dropdown-hover">
+    <div class="w3-col" style="width:10%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
+    <div class="w3-col" style="width:15%">  <div class="w3-dropdown-hover">
 		    <button class="w3-button w3-black">Activities</button>
 		    <div class="w3-dropdown-content w3-bar-block w3-border">
 		      <button id="button_restaurant"class="w3-bar-item w3-button" onclick="sendButton(this)">Restaurants</button>
@@ -144,8 +144,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		    </div>
 		  </div> 
 	</div>
-        <div class="w3-col" style="width:50%">
-        <div class="w3-col" style="width:50%"> <a class="w3-bar-item">What do you want to search?</a> </div>
+        <div class="w3-col" style="width:400px;">
+        
 
             <jsp:include page="ViewSearch.jsp" />
 
@@ -156,7 +156,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     	 
 		  <c:if test= "${not empty user}">
 		  
-	 		<button class="w3-button w3-circle w3-teal" onclick="document.getElementById('id01').style.display='block'">+</button>	 
+	 		<button class="w3-button w3-circle w3-teal w3-show-inline-block" onclick="document.getElementById('id01').style.display='block'">+</button>	 
 	 		
 		 </c:if>
 
@@ -221,7 +221,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     <div class="w3-container">
                         <h5 class="w3-opacity"><b>${BeanUser.user}</b></h5>
                         <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanUser.profilename} <span class="w3-tag w3-teal w3-round">  ${BeanUser.mail} </span></h6>
-                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanUser.phoneNumber}</span>  USER -> ${BeanUser.user    }
+                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanUser.phoneNumber}</span>  USER -> ${BeanUser.user}
                         <hr>
                     </div>
 
@@ -268,16 +268,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		
 		url ="http://localhost:8080/finalProject/UserProfileController"
 		$("#userProfile").show();
-
-		$.post(url,{content:event.innerHTML},
+	
+		
+		me = " ";
+		if (document.getElementById("user_name")) {
+			me = document.getElementById("user_name").innerText;
+		}
+	
+		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
-			
-			
+
 			document.getElementById('profileposts').innerHTML = '';
-			
+		
 			a = JSON.parse(response)
 
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
+			var myname = document.getElementById("labe_username").innerHTML= a[0].username;
+			if (usarname == me || me === " ")
+				document.getElementById("followbutoon").style.display="none";
 			
 			
 			if (a[1].description=="null")
@@ -313,6 +321,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					
 			    
 				}
+				
+				
+				if (a[4].isFollowing=="true")
+					document.getElementById("followbutoon").innerHTML= "Following";
+				
+				
 			}
 		);		
 	}
@@ -337,6 +351,31 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		
 		//$('#wrapper').load('EditPostController',{postId: id})
 	}
+	
+	  
+	  buttontest = document.getElementById("followbutoon");
+	  realvalue ="";
+
+	  	buttontest.addEventListener("mouseover", function( event ){
+	  		if (buttontest.innerText=="Following"){
+	  		realvalue = buttontest.innerText;
+	  	  	buttontest.innerText="Unfollow";
+	  	  	}
+	  	    setTimeout(function() {
+	  	 
+	  	    }, 500);
+	  	  }, false);
+	  	
+  		buttontest.addEventListener("mouseout", function( event ){
+  			realvalue = buttontest.innerText;
+  			if (buttontest.innerText=="Unfollow"){
+  		  		realvalue = buttontest.innerText;
+  		  	  	buttontest.innerText="Following";
+  		  	  	}
+	  	    setTimeout(function(){     
+	  	    }, 500);
+	  	  }, false);
+	  	
 	
 	</script>
 

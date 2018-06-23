@@ -48,14 +48,58 @@ public class UserProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-			String username = (String)request.getParameter("content");
-			BeanUser user = null;
-			String allpost ="";
+			String content =  (String)request.getParameter("content");
+			Boolean isFollowing = false;
+					
+			if (content.equals("Follow")){
+				String user1 =  (String)request.getParameter("user1");
+				String user2 =  (String)request.getParameter("user2");
+				System.out.println(Querys.insertFollow(user1, user2));
+				try {
+					UserUtils.insertFollow(user1,user2);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				PrintWriter out = response.getWriter();
+				out.println("{\"content\":\"Follow\"}");
+
+			}
+			else if (content.equals("Unfollow")){
+				
+				String user1 =  (String)request.getParameter("user1");
+				String user2 =  (String)request.getParameter("user2");
+				System.out.println(Querys.deleteFollow(user1, user2));
+				try {
+					UserUtils.deleteFollow(user1,user2);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				PrintWriter out = response.getWriter();
+				out.println("{\"content\":\"Unfollow\"}");
+				
+			} 
+			else {
+				
 			
+			String username = (String)request.getParameter("content");
+			String myusername = (String)request.getParameter("user1");
+			
+
+			BeanUser user = null;
+		
 			StringBuilder stringBuilder = new StringBuilder();
 
 			try {
+					
+					ResultSet follow =UserUtils.checkFollow(myusername,username);
+					
 					ResultSet user_bd = UserUtils.getUser(username);
+					
+					if (!follow.isBeforeFirst() ) {    
+						isFollowing=false;
+					}else {isFollowing=true;}
 					
 					user = new BeanUser();
 					
@@ -97,20 +141,9 @@ public class UserProfileController extends HttpServlet {
 						stringBuilder.append("\"is_public\""+":\""+allPosts.getBoolean("is_public")+"\"");
 						stringBuilder.append("}],");
 					
-						//json.put("id",allPosts.getInt("id"));
-						//json.put("author",allPosts.getString("author"));
-						//json.put("title",allPosts.getString("title"));
-						//json.put("eventime",allPosts.getString("eventTime").replace("T", " "));
-						//json.put("place",allPosts.getString("place"));
-						//json.put("likes",allPosts.getInt("likes"));
-						//json.put("time",allPosts.getString("time"));
-						//json.put("interest",allPosts.getString("interest"));
-						//json.put("is_public",allPosts.getBoolean("is_public"));
-						
-					
-						
-					}
 
+					}
+			
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -124,9 +157,9 @@ public class UserProfileController extends HttpServlet {
 				}
 			finalString = finalString+ "]";
 			
-			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"},"+finalString+"]");
+			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"},"+finalString+",{\"isFollowing\":\""+isFollowing+"\"}]");
 
-		
+		}
 	}
 
 	/**
