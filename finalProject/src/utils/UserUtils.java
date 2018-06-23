@@ -65,6 +65,26 @@ public class UserUtils {
     	
     }
 
+    //follow
+    
+    public static void insertFollow(String user1, String user2) throws Exception {
+    	DAO dao = new DAO();
+    	dao.execute((Querys.insertFollow(user1,user2)));
+    	
+    }
+    
+    public static void deleteFollow(String user1, String user2) throws Exception {
+    	DAO dao = new DAO();
+    	dao.execute((Querys.deleteFollow(user1,user2)));
+    	
+    }
+    public static ResultSet checkFollow(String user1, String user2) throws Exception {
+    	DAO dao = new DAO();
+    	result = dao.executeSQL((Querys.checkFollow(user1,user2)));
+    	return result;
+    }	
+    
+    
     public static void insertUser(String username, String mail, String password) throws Exception {
 		if(!checkMailAndUsername(mail, username).next()){
 			DAO dao = new DAO();

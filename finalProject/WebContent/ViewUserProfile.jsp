@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" session="false" import="models.BeanUser"%>
 
 
-
 <% 
 
 
@@ -19,6 +18,23 @@ System.out.println(user.getUser());
 %>
 
 <script>
+
+
+function follow(event){
+	
+	url ="http://localhost:8080/finalProject/UserProfileController"
+	user1 = document.getElementById("user_name").innerText;
+	user2 = document.getElementById("labe_username").innerHTML;
+	console.log(user1+user2);
+	$.post(url,{content:event.innerText, user1:user1, user2:user2},
+		function(response){
+
+
+		}
+	
+
+	);
+}
 
 </script>
 
@@ -43,9 +59,11 @@ System.out.println(user.getUser());
 
 		  	</div>
 		  	<div class="w3-container w3-half">
+		  	
+		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge" onclick="follow(this);">Follow</button>
+
 		  	<img id=user_profile class= "image-cropper" src="" >
-		  	
-		  	
+
 		  </div>
 		</div>
 		
