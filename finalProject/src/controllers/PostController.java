@@ -60,12 +60,12 @@ public class PostController extends HttpServlet {
 		   try {
 				
 			   BeanUtils.populate(post, request.getParameterMap());
-			   dispatcher = request.getRequestDispatcher("ViewPostDone.jsp");
+			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   
 			   if (post.isComplete()) {
 				  
 				   PostUtils.insertPost(
-				   		post.getAuthor(),
+				   		   post.getAuthor(),
 						   post.getTitle(),
 						   post.getContent(),
 						   post.getEventTime(),

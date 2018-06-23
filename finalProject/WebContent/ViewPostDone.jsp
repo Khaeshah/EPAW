@@ -25,6 +25,11 @@ $(document).ready(function(){
 
 </script>
 		<div id="post">
+      	<span onclick="deletePost(${post.id})" class="w3-button" >&times;</span>
+      	
+      	<!-- Edit posts -->  
+      	<span onclick="editPost(${post.id})" class="w3-button" id="bEditPost">■</span>
+ 
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${post.title}</h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${post.content}</b></h5>

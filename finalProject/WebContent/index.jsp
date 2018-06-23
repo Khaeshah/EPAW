@@ -275,19 +275,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			me = document.getElementById("user_name").innerText;
 		}
 	
+		if (event.innerHTML === me || me === " ")
+			document.getElementById("followbutoon").style.display="none";
+		else 
+			{document.getElementById("followbutoon").style.display="block";}
 		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
 
 			document.getElementById('profileposts').innerHTML = '';
 		
 			a = JSON.parse(response)
-
+			
+			
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
-			var myname = document.getElementById("labe_username").innerHTML= a[0].username;
-			if (usarname == me || me === " ")
-				document.getElementById("followbutoon").style.display="none";
-			
-			
+
+
 			if (a[1].description=="null")
 				var description = document.getElementById("labe_description").innerHTML= "";
 			else
@@ -332,6 +334,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	function deletePost(id) {
+		console.log(id);
 		$('#wrapper').load('DeletePostController',{postId: id})
 	}
 	
