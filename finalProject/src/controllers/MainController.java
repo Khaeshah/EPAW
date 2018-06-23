@@ -49,22 +49,25 @@ public class MainController extends HttpServlet {
 		try {
 			
 				if(session.getAttribute("user")!=null)
-				username = (String) session.getAttribute("user");
-				user = new BeanUser();
-				user_db = UserUtils.getUser(username);
-				while (user_db.next()){
-			
-				user.setUser(user_db.getString("username"));
-				user.setMail((user_db.getString("mail")));
-				user.setPassword(user_db.getString("password"));
-				user.setUrl(user_db.getString("url"));
-				user.setDescription(user_db.getString("description"));
-				user.setIs_admin(user_db.getBoolean("is_admin"));
-				user.setPhoneNumber(user_db.getString("is_admin"));
-				user.setProfilename(user_db.getString("profilename"));
-				}
-		
-				ResultSet allPosts = PostUtils.getAllPosts();
+					username = (String) session.getAttribute("user");
+					user = new BeanUser();
+					user_db = UserUtils.getUser(username);
+					while (user_db.next()){
+						
+						user.setUser(user_db.getString("username"));
+						user.setMail((user_db.getString("mail")));
+						user.setPassword(user_db.getString("password"));
+						user.setUrl(user_db.getString("url"));
+						user.setDescription(user_db.getString("description"));
+						user.setIs_admin(user_db.getInt("is_admin"));
+						user.setPhoneNumber(user_db.getString("is_admin"));
+						user.setProfilename(user_db.getString("profilename"));
+					}
+					if(user.isIs_admin()) {
+						System.out.println("shit");
+						
+					}
+					ResultSet allPosts = PostUtils.getAllPosts();
 		
 					while (allPosts.next()){
 

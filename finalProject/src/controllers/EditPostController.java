@@ -20,14 +20,14 @@ import utils.Querys;
 /**
  * Servlet implementation class DeletePostController
  */
-@WebServlet("/DeletePostController")
-public class DeletePostController extends HttpServlet {
+@WebServlet("/EditPostController")
+public class EditPostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletePostController() {
+    public EditPostController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,16 +37,21 @@ public class DeletePostController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		// Id of the post to be edited
 		Integer id = Integer.parseInt(request.getParameter("postId").toString());
+		String title = request.getParameter("title").toString();
+		String content = request.getParameter("content").toString();
 
 		RequestDispatcher dispatcher = null;
 		   try {
 			   
-			   
+			   // We can reuse the delete view
 			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   //System.out.println(Querys.deletePost(id));
-			   if(id != -1) PostUtils.deletePost(id);
+			   
+			   
+			   //TODO UPDATEPOST
+			   //if(id != -1) PostUtils.updatePost(id,title,content);
 
 			   request.setAttribute("id",id);
 			   dispatcher.forward(request, response);
