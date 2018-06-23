@@ -50,8 +50,8 @@ public class EditPostController extends HttpServlet {
 			   //System.out.println(Querys.deletePost(id));
 			   
 			   
-			   TODO UPDATEPOST
-			   if(id != -1) PostUtils.updatePost(id,title,content);
+			   //TODO UPDATEPOST
+			   //if(id != -1) PostUtils.updatePost(id,title,content);
 
 			   request.setAttribute("id",id);
 			   dispatcher.forward(request, response);
