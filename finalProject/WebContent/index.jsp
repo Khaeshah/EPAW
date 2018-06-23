@@ -327,6 +327,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		title = a.children[2].innerText;
 		content = a.children[3].children[0].innerText;
 		
+		document.getElementById("idPost").innerText = id;
 		document.getElementById("titlePost").innerText = title;
 		document.getElementById("contentPost").innerText = content;
 		$('#post_modal').show();

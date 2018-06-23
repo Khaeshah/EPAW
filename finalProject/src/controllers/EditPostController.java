@@ -41,19 +41,20 @@ public class EditPostController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Id of the post to be edited
-		Integer id = Integer.parseInt(request.getParameter("postId").toString());
+		//Integer id = Integer.parseInt(request.getParameter("postId").toString());
 		BeanPost post = new BeanPost();
 		HttpSession session = request.getSession();
-		String oldusername = (String) session.getAttribute("user");
+		//String oldusername = (String) session.getAttribute("user");
 		//String title = request.getParameter("title").toString();
 		//String content = request.getParameter("content").toString();
 		
 		RequestDispatcher dispatcher = null;
 		   try {
 			   BeanUtils.populate(post, request.getParameterMap());
+			   PostUtils.UpdatePostFromId(post.getId(),post.getTitle(),post.getContent());
 			   //UserUtils.UpdateUserFromName(oldusername,user.getUrl(), user.getDescription(), user.getUser());
-			   ResultSet post_db = PostUtils.getPost(id);
-			   while (post_db.next()){
+			   //ResultSet post_db = PostUtils.getPost(id);
+			   //while (post_db.next()){
 				   /*
 					user.setUser(user_db.getString("username"));
 					user.setMail((user_db.getString("mail")));
@@ -64,7 +65,7 @@ public class EditPostController extends HttpServlet {
 					user.setPhoneNumber(user_db.getString("is_admin"));
 					user.setProfilename(user_db.getString("profilename"));
 					*/
-			   }
+			   //}
 				   	
 
 			   

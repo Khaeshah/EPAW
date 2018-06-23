@@ -25,17 +25,18 @@ $(document).ready(function(){
 		
 		<div class="w3-row ">
 		  <div class="w3-container w3-half ">
+		  	<textarea class="w3-input w3-border" style="display:none;" id="idPost" name="id"></textarea>
 			<p>      
 			<label class="w3-text-grey">Title</label>
-			<textarea class="w3-input w3-border" id="titlePost" name="title" style="resize:none">PUTASO ${BeanPost.id}</textarea>
+			<textarea class="w3-input w3-border" id="titlePost" name="title" style="resize:none"></textarea>
 			</p>
 			<p>
 		    <label class="w3-text-grey">Content </label>
-		    <textarea class="w3-input w3-border " id="contentPost" name="content" style="resize:none">AQUI EL CONTENT</textarea>
+		    <textarea class="w3-input w3-border " id="contentPost" name="content" style="resize:none"></textarea>
 		    </p>
-
-			<p> <input class="w3-button w3-black" name="submit" type="submit" value="Save"> </p>
 			
+			<p> <input class="w3-button w3-black" name="submit" type="submit" value="Save"> </p>
+
 		  </div>
 		  <div class="w3-container w3-half">
 		  	<img class= "image-cropper" src="${userinfo.url}" width="200" height="200">
