@@ -29,7 +29,7 @@ $(document).ready(function(){
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${post.content}</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
-          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
+          <p> <span class="fake-link" style="text-decoration: underline color:blue" onclick="showProfile(this)">${post.author}</span>  posted ${post.time}</p>
           <hr>
         </div>
         </div>

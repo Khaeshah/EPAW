@@ -184,16 +184,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	<!-- Delete posts -->
       	<c:if test="${BeanPost.author eq user}">
       	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
-      	</c:if>   
-      	
-      	<!-- Edit posts -->  
-      	<c:if test="${BeanPost.author eq user}"> 	
-      	<span onclick="editPost(${BeanPost.id})" class="w3-button" >■</span>
-      	</c:if>  
-      	
-      	
-      	
-        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
+        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
      
         <div class="w3-container">
@@ -238,15 +229,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 
-	<div id="user_post">
+	<div id="user_post" style="display:none;">
         <h2  id="user_post_title" class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i></h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b  id="user_post_content"></b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
-          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>time<span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
+          <p> <span class="fake-link" style="text-decoration: underline color:blue">name </span> posted this at </p>
           <hr>
         </div>
-        </div>
+     </div>
         
         
 	<script>
@@ -269,7 +260,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			a = JSON.parse(response)
 
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
-			var description = document.getElementById("labe_description").innerHTML= a[1].description;
+			
+			
+			if (a[1].description=="null")
+				var description = document.getElementById("labe_description").innerHTML= "";
+			else
+				var description = document.getElementById("labe_description").innerHTML= a[1].description;
 			
 				if(a[2].url !="null")
 					var url = document.getElementById("user_profile").src= a[2].url;
@@ -279,17 +275,25 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			
 				var i;
 				for (i = 0; i < a[3].length; i++) { 
-					console.log(a[3][i][0]);
+				
 					
 					var div = document.getElementById('user_post');
 				    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
 					clone.id = "post"+a[3][i][0].id+ +a[3][i][0].author;
-					document.getElementById("user_post_title").innerHTML = a[3][i][0].author;
+					
+					clone.style.display="block";
+					clone.children[1].children[0].children[0].innerHTML = a[3][i][0].content;
+		
+					clone.children[0].innerHTML += a[3][i][0].title+"   ||  "+a[3][i][0].interest;
+					
+					clone.children[1].children[1].innerHTML=clone.children[1].children[1].innerHTML.replace("time",a[3][i][0].eventime+" ");
+					clone.children[1].children[1].children[1].innerHTML = a[3][i][0].place;
+					clone.children[1].children[2].children[0].innerHTML = a[3][i][0].author;
+					clone.children[1].children[2].innerHTML += a[3][i][0].time;
+
 					document.getElementById('profileposts').appendChild(clone);
 					
-					
-					
-				    
+			    
 				}
 				
 				
