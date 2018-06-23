@@ -23,6 +23,12 @@ public class PostUtils {
         result = dao.executeSQL(Querys.getAllPosts());
         return result;
     }
+    
+    public static ResultSet getPost(Integer id) throws Exception {
+        DAO dao = new DAO();
+        result = dao.executeSQL(Querys.getPost(id));
+        return result;
+    }
 
     public static ResultSet gettAllPostInterest(String interest) throws Exception {
         DAO dao = new DAO();

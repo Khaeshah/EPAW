@@ -58,7 +58,10 @@ public class Querys {
     public static String getAllPosts(){
         return "SELECT * FROM Post ORDER BY time DESC;";
     }
-
+    
+    public static String getPost(Integer id){
+        return "SELECT * FROM Post WHERE id = '" + id + "';";
+    }
     public static String getAllPublicPosts(){
         return "SELECT * FROM Post WHERE is_public = true ORDER BY time DESC;";
     }
