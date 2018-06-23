@@ -25,15 +25,18 @@ function follow(event){
 	url ="http://localhost:8080/finalProject/UserProfileController"
 	user1 = document.getElementById("user_name").innerText;
 	user2 = document.getElementById("labe_username").innerHTML;
-	console.log(user1+user2);
 	$.post(url,{content:event.innerText, user1:user1, user2:user2},
 		function(response){
-
-
+		
+		a = JSON.parse(response);
+		if(a.content=="Follow")
+			document.getElementById("followbutoon").innerText="Following";
+		else
+			document.getElementById("followbutoon").innerText="Follow";
 		}
-	
 
 	);
+	
 }
 
 </script>
@@ -76,3 +79,5 @@ function follow(event){
 		
     </div>
   </div>
+  
+  

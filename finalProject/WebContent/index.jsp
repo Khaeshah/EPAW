@@ -256,17 +256,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		$("#userProfile").show();
 	
 		
-		me = document.getElementById("user_name").innerText;
+		me = " ";
+		if (document.getElementById("user_name")) {
+			me = document.getElementById("user_name").innerText;
+		}
+	
 		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
 
 			document.getElementById('profileposts').innerHTML = '';
-			
+		
 			a = JSON.parse(response)
 
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
 			var myname = document.getElementById("labe_username").innerHTML= a[0].username;
-			if (usarname == document.getElementById("user_name").innerText)
+			if (usarname == me || me === " ")
 				document.getElementById("followbutoon").style.display="none";
 			
 			
@@ -305,6 +309,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 				}
 				
 				
+				if (a[4].isFollowing=="true")
+					document.getElementById("followbutoon").innerHTML= "Following";
+				
+				
 			}
 		
 
@@ -321,6 +329,31 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		System.out.println(title);
 		$('#wrapper').load('EditPostController',{postId: id})
 	}
+	
+	  
+	  buttontest = document.getElementById("followbutoon");
+	  realvalue ="";
+
+	  	buttontest.addEventListener("mouseover", function( event ){
+	  		if (buttontest.innerText=="Following"){
+	  		realvalue = buttontest.innerText;
+	  	  	buttontest.innerText="Unfollow";
+	  	  	}
+	  	    setTimeout(function() {
+	  	 
+	  	    }, 500);
+	  	  }, false);
+	  	
+  		buttontest.addEventListener("mouseout", function( event ){
+  			realvalue = buttontest.innerText;
+  			if (buttontest.innerText=="Unfollow"){
+  		  		realvalue = buttontest.innerText;
+  		  	  	buttontest.innerText="Following";
+  		  	  	}
+	  	    setTimeout(function(){     
+	  	    }, 500);
+	  	  }, false);
+	  	
 	
 	</script>
 

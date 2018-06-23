@@ -62,7 +62,7 @@ public class UserProfileController extends HttpServlet {
 					e.printStackTrace();
 				}
 				PrintWriter out = response.getWriter();
-				out.println("Following");
+				out.println("{\"content\":\"Follow\"}");
 
 			}
 			else if (content.equals("Unfollow")){
@@ -77,7 +77,7 @@ public class UserProfileController extends HttpServlet {
 					e.printStackTrace();
 				}
 				PrintWriter out = response.getWriter();
-				out.println("Following");
+				out.println("{\"content\":\"Unfollow\"}");
 				
 			} 
 			else {
@@ -92,8 +92,8 @@ public class UserProfileController extends HttpServlet {
 			StringBuilder stringBuilder = new StringBuilder();
 
 			try {
-					System.out.println(Querys.checkFollow(username, myusername));
-					ResultSet follow =UserUtils.checkFollow(username, myusername);
+					
+					ResultSet follow =UserUtils.checkFollow(myusername,username);
 					
 					ResultSet user_bd = UserUtils.getUser(username);
 					
@@ -157,7 +157,7 @@ public class UserProfileController extends HttpServlet {
 				}
 			finalString = finalString+ "]";
 			
-			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"},"+finalString+"]");
+			out.println("[{\"username\":\""+user.getProfilename()+"\"},{\"description\":\""+user.getDescription()+"\"},{\"url\":\""+user.getUrl()+"\"},"+finalString+",{\"isFollowing\":\""+isFollowing+"\"}]");
 
 		}
 	}
