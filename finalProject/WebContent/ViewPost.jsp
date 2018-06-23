@@ -6,9 +6,9 @@
 <script>
 
 $(document).ready(function(){
-    $("#PostForm").validate({
+    $("#EditPostForm").validate({
     	submitHandler: function(form) {
-    		$("#wrapper").load('EditPostController',$("#PostForm").serialize());
+    		$("#wrapper").load('EditPostController',$("#EditPostForm").serialize());
     }
     });
 });
@@ -18,7 +18,7 @@ $(document).ready(function(){
 <div id="post_modal" class="w3-modal">
 
     <div class="w3-modal-content">
-        <form  id="PostForm" class="w3-container w3-card-4" action="EditPostController" >
+        <form  id="EditPostForm" class="w3-container w3-card-4" action="EditPostController" >
         <span onclick="document.getElementById('post_modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 		<br>
 		<p>
