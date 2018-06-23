@@ -182,7 +182,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	-->
       	
       	<!-- Delete posts -->
-      	<c:if test="${BeanPost.author eq user}">
+
       	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
@@ -257,6 +257,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 		$.post(url,{content:event.innerHTML},
 			function(response){
+			
+			
+			document.getElementById('profileposts').innerHTML = '';
+			
 			a = JSON.parse(response)
 
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
