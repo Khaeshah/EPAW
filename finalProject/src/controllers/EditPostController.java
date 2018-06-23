@@ -73,7 +73,7 @@ public class EditPostController extends HttpServlet {
 			   //TODO UPDATEPOST
 			   //if(id != -1) PostUtils.updatePost(id,title,content);
 
-			   dispatcher = request.getRequestDispatcher("index.jsp");
+			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   //dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   //request.setAttribute("id",id);
 			   // revisar que pasa al index
