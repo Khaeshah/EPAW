@@ -34,6 +34,7 @@ $(document).ready(function(){
 		    <label class="w3-text-grey">Content </label>
 		    <textarea class="w3-input w3-border " id="contentPost" name="content" style="resize:none"></textarea>
 		    </p>
+		    
 			
 			<p> <input class="w3-button w3-black" name="submit" type="submit" value="Save"> </p>
 

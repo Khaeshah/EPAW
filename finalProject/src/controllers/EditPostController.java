@@ -78,6 +78,7 @@ public class EditPostController extends HttpServlet {
 			   //request.setAttribute("id",id);
 			   // revisar que pasa al index
 			   request.setAttribute("post",post);
+			   
 			   dispatcher.forward(request, response);
 		   
 	
