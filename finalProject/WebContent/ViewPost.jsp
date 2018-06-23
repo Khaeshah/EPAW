@@ -10,11 +10,7 @@ $(document).ready(function(){
     	submitHandler: function(form) {
     		$("#wrapper").load('EditPostController',$("#EditPostForm").serialize());
     	}
-    });    
-	$("#bEditPost").click(function(event) {
-	    $('#post_modal').show();
-	    });
-    
+    });      
 });
 
 </script>
@@ -31,11 +27,11 @@ $(document).ready(function(){
 		  <div class="w3-container w3-half ">
 			<p>      
 			<label class="w3-text-grey">Title</label>
-			<textarea class="w3-input w3-border" name="title" style="resize:none">AQUI EL TITLE</textarea>
+			<textarea class="w3-input w3-border" id="titlePost" name="title" style="resize:none">PUTASO ${BeanPost.id}</textarea>
 			</p>
 			<p>
 		    <label class="w3-text-grey">Content </label>
-		    <textarea class="w3-input w3-border " name="content" style="resize:none">AQUI EL CONTENT</textarea>
+		    <textarea class="w3-input w3-border " id="contentPost" name="content" style="resize:none">AQUI EL CONTENT</textarea>
 		    </p>
 
 			<p> <input class="w3-button w3-black" name="submit" type="submit" value="Save"> </p>

@@ -321,11 +321,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		$('#wrapper').load('DeletePostController',{postId: id})
 	}
 	
-	function editPost(id,title,content) {
-		//$('#post_modal').show();
-		console.log("ID: " + id);
-		console.log("Title: " + title);
-		console.log("Content: " + content);
+	function editPost(id) {
+		postide = "post" + id + "}";
+		a = document.getElementById(postide);
+		title = a.children[2].innerText;
+		content = a.children[3].children[0].innerText;
+		
+		document.getElementById("titlePost").innerText = title;
+		document.getElementById("contentPost").innerText = content;
+		$('#post_modal').show();
 		//$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
