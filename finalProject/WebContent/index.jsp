@@ -334,6 +334,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		document.getElementById("titlePost").innerText = title;
 		document.getElementById("contentPost").innerText = content;
 		$('#post_modal').show();
+		
 		//$('#wrapper').load('EditPostController',{postId: id})
 	}
 	

@@ -90,9 +90,9 @@ public class PostUtils {
    	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place,likes, time,interest, isPublic));
     }
     
-    public static void UpdatePostFromId(Integer id, String title, String content) throws Exception {
+    public static void UpdatePostFromId(Integer id, String title, String content, String date) throws Exception {
     	DAO dao = new DAO();    	
-    	dao.execute((Querys.UpdatePostFromId(id,title,content)));
+    	dao.execute((Querys.UpdatePostFromId(id,title,content,date)));
     	
     }
     

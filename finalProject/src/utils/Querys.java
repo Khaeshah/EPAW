@@ -48,8 +48,8 @@ public class Querys {
     
     // update post
     
-    public static String UpdatePostFromId(Integer id, String title, String content){
-    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "' WHERE id ='" + id +"';";
+    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
     }
     
     // post 

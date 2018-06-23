@@ -21,7 +21,7 @@ import utils.Querys;
 import utils.UserUtils;
 
 /**
- * Servlet implementation class DeletePostController
+ * Servlet implementation class EditPostController
  */
 @WebServlet("/EditPostController")
 public class EditPostController extends HttpServlet {
@@ -40,47 +40,25 @@ public class EditPostController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Id of the post to be edited
-		//Integer id = Integer.parseInt(request.getParameter("postId").toString());
 		BeanPost post = new BeanPost();
 		HttpSession session = request.getSession();
-		//String oldusername = (String) session.getAttribute("user");
-		//String title = request.getParameter("title").toString();
-		//String content = request.getParameter("content").toString();
-		
 		RequestDispatcher dispatcher = null;
 		   try {
+			   
 			   BeanUtils.populate(post, request.getParameterMap());
-			   PostUtils.UpdatePostFromId(post.getId(),post.getTitle(),post.getContent());
-			   //UserUtils.UpdateUserFromName(oldusername,user.getUrl(), user.getDescription(), user.getUser());
-			   //ResultSet post_db = PostUtils.getPost(id);
-			   //while (post_db.next()){
-				   /*
-					user.setUser(user_db.getString("username"));
-					user.setMail((user_db.getString("mail")));
-					user.setPassword(user_db.getString("password"));
-					user.setUrl(user_db.getString("url"));
-					user.setDescription(user_db.getString("description"));
-					user.setIs_admin(user_db.getInt("is_admin"));
-					user.setPhoneNumber(user_db.getString("is_admin"));
-					user.setProfilename(user_db.getString("profilename"));
-					*/
-			   //}
-				   	
-
+			   LocalDateTime localDateTime = LocalDateTime.now();
+			   String  time = localDateTime.toString().replace("T", " ").replace(".", " ");
+			   String splitedtime[] = time.split(" ");
+			   if (splitedtime.length > 1) {
+				   time = splitedtime[0]+ " " +splitedtime[1];
+			   }
 			   
-			   
-			   //TODO UPDATEPOST
-			   //if(id != -1) PostUtils.updatePost(id,title,content);
+			   PostUtils.UpdatePostFromId(post.getId(),post.getTitle(),post.getContent(),time);
 
-			   dispatcher = request.getRequestDispatcher("index.jsp");
-			   //dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
-			   //request.setAttribute("id",id);
-			   // revisar que pasa al index
+			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   request.setAttribute("post",post);
+			   
 			   dispatcher.forward(request, response);
-		   
-	
 		   } catch (Exception exception) {
 					if(dispatcher != null){
 						dispatcher.forward(request, response);
