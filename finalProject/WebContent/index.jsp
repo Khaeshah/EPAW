@@ -324,7 +324,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	function editPost(id) {
 		postide = "post" + id + "}";
 		a = document.getElementById(postide);
-		title = a.children[2].innerText;
+		
+		// Obtenim el titol
+		title = a.children[2].innerText.split('|')[0];
+		// Obtenim el contingut
 		content = a.children[3].children[0].innerText;
 		
 		document.getElementById("idPost").innerText = id;
