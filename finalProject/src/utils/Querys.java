@@ -46,6 +46,12 @@ public class Querys {
     	return "UPDATE user SET profilename ='"+newUsername+"', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
     }
     
+    // update post
+    
+    public static String UpdatePostFromId(Integer id, String title, String content){
+    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "' WHERE id ='" + id +"';";
+    }
+    
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){
         return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"',"+likes+",'"+time+"','"+ interest+ "'," + is_public +");";
