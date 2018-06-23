@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
@@ -14,20 +15,22 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanPost;
+import models.BeanUser;
 import utils.PostUtils;
 import utils.Querys;
+import utils.UserUtils;
 
 /**
  * Servlet implementation class DeletePostController
  */
-@WebServlet("/DeletePostController")
-public class DeletePostController extends HttpServlet {
+@WebServlet("/EditPostController")
+public class EditPostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletePostController() {
+    public EditPostController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +40,43 @@ public class DeletePostController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		// Id of the post to be edited
 		Integer id = Integer.parseInt(request.getParameter("postId").toString());
-
+		BeanPost post = new BeanPost();
+		HttpSession session = request.getSession();
+		String oldusername = (String) session.getAttribute("user");
+		//String title = request.getParameter("title").toString();
+		//String content = request.getParameter("content").toString();
+		
 		RequestDispatcher dispatcher = null;
 		   try {
-			   
-			   
-			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
-			   //System.out.println(Querys.deletePost(id));
-			   if(id != -1) PostUtils.deletePost(id);
+			   BeanUtils.populate(post, request.getParameterMap());
+			   //UserUtils.UpdateUserFromName(oldusername,user.getUrl(), user.getDescription(), user.getUser());
+			   ResultSet post_db = PostUtils.getPost(id);
+			   while (post_db.next()){
+				   /*
+					user.setUser(user_db.getString("username"));
+					user.setMail((user_db.getString("mail")));
+					user.setPassword(user_db.getString("password"));
+					user.setUrl(user_db.getString("url"));
+					user.setDescription(user_db.getString("description"));
+					user.setIs_admin(user_db.getInt("is_admin"));
+					user.setPhoneNumber(user_db.getString("is_admin"));
+					user.setProfilename(user_db.getString("profilename"));
+					*/
+			   }
+				   	
 
-			   request.setAttribute("id",id);
+			   
+			   
+			   //TODO UPDATEPOST
+			   //if(id != -1) PostUtils.updatePost(id,title,content);
+
+			   dispatcher = request.getRequestDispatcher("index.jsp");
+			   //dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
+			   //request.setAttribute("id",id);
+			   // revisar que pasa al index
+			   request.setAttribute("post",post);
 			   dispatcher.forward(request, response);
 		   
 	

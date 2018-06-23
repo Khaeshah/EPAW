@@ -63,7 +63,7 @@ public class ProfileController extends HttpServlet {
 				user.setPassword(user_db.getString("password"));
 				user.setUrl(user_db.getString("url"));
 				user.setDescription(user_db.getString("description"));
-				user.setIs_admin(user_db.getBoolean("is_admin"));
+				user.setIs_admin(user_db.getInt("is_admin"));
 				user.setPhoneNumber(user_db.getString("is_admin"));
 				user.setProfilename(user_db.getString("profilename"));
 				

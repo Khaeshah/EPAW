@@ -29,14 +29,20 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <% 
 
 	String user = "";
+	Boolean isAdmin = false;
 		if(session.getAttribute("user") != null ){
 			user = session.getAttribute("user").toString();
+
 		}
+
 
 	BeanUser userinfo = null;
 
 		if (request.getAttribute("userinfo")!=null) {
 			userinfo = (BeanUser)request.getAttribute("userinfo");
+			isAdmin = userinfo.isIs_admin();
+			//if(isAdmin == true) System.out.println("TRUE");
+			//else if(isAdmin == false) System.out.println("FALSE");
 		}
 		else {
 			userinfo = new BeanUser();
@@ -157,17 +163,30 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	   <jsp:include page="ViewProfile.jsp"/>
 	   
 	   <jsp:include page="ViewUserProfile.jsp"/>
+	   <jsp:include page="ViewPost.jsp"/>
 	
       	<div id="Posts"  class="w3-container w3-card w3-white w3-margin-bottom">
       	
       	<c:forEach items="${postList}" var="BeanPost">
       	
       	<div id="post${BeanPost.id}}">
-      	<!-- TODO: Admin and user should be able to delete -->
+      	
+      	
+      	<!-- TODO: Only admin and user should be able to delete -->
+      	<!-- <c:set var="userAdmin" value="${isAdmin}"/> -->
+      	<!-- div>qwe qwe  ${isAdmin}</div>   
+      	<c:if test="${isAdmin eq true}">
+      		entro al if
+
+		</c:if>
+      	-->
+      	
+      	<!-- Delete posts -->
+      	<c:if test="${BeanPost.author eq user}">
       	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
-        
+     
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${BeanPost.content}</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventTime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
@@ -179,7 +198,23 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	
 
       	</c:forEach>
-      	
+
+            <c:forEach items="${userList}" var="BeanUser">
+
+                <div id="post${BeanUser.user}}">
+                    <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanUser.profilename}</h2>
+
+                    <div class="w3-container">
+                        <h5 class="w3-opacity"><b>${BeanUser.user}</b></h5>
+                        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanUser.profilename} <span class="w3-tag w3-teal w3-round">  ${BeanUser.mail} </span></h6>
+                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanUser.phoneNumber}</span>  USER -> ${BeanUser.user    }
+                        <hr>
+                    </div>
+
+                </div>
+
+
+            </c:forEach>
      
         </div>
       </div>
@@ -271,9 +306,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	function deletePost(id) {
-		//$('#userProfile').load('ProfileController',{type:"other",content:event.innerHTML});
 		$('#wrapper').load('DeletePostController',{postId: id})
-		//alert("Post " + id + " Eliminado!");
+	}
+	
+	function editPost(id,title,content) {
+		System.out.println(title);
+		$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
 	</script>
