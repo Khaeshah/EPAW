@@ -63,10 +63,6 @@ public class MainController extends HttpServlet {
 						user.setPhoneNumber(user_db.getString("is_admin"));
 						user.setProfilename(user_db.getString("profilename"));
 					}
-					if(user.isIs_admin()) {
-						System.out.println("shit");
-						
-					}
 					ResultSet allPosts = PostUtils.getAllPosts();
 		
 					while (allPosts.next()){
