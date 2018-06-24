@@ -42,6 +42,11 @@ public class MainController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		String content ="";
+		
+	
+		content =  (String)request.getParameter("content");
+		
 		String username = null;
 		BeanUser user = null;
 		ResultSet user_db = null;
@@ -63,12 +68,19 @@ public class MainController extends HttpServlet {
 						user.setPhoneNumber(user_db.getString("is_admin"));
 						user.setProfilename(user_db.getString("profilename"));
 					}
-					if(user.isIs_admin()) {
-						System.out.println("shit");
+	
+					ResultSet allPosts = null;
+					
+					if(content!=null && !content.isEmpty() && content.equals("Subscription")){
+						allPosts = PostUtils.getAllPostsByFollow(username);
+						System.out.println(Querys.getAllPostsByFollow(username));
+					}
+					else {
+						
+						allPosts = PostUtils.getAllPosts();
 						
 					}
-					ResultSet allPosts = PostUtils.getAllPosts();
-		
+					
 					while (allPosts.next()){
 
 						BeanPost post = new BeanPost();

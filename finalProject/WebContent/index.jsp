@@ -134,7 +134,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div id="search_bar" class="w3-bar w3-black ">
     
     
-    <div class="w3-col" style="width:10%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
+     <div class="w3-col" style="width:10%">  <div class="w3-dropdown-hover">
+     		
+		    <button class="w3-button w3-black" onclick="sendButton(this)">Home</button>
+		    
+			     <c:if test= "${not empty user}">
+			    <div class="w3-dropdown-content w3-bar-block w3-border">
+			    	<button class="w3-bar-item w3-button" onclick="sendButton(this)">Subscription</button> 
+			    </div>
+			    </c:if>
+		  </div> 
+	</div>
     <div class="w3-col" style="width:15%">  <div class="w3-dropdown-hover">
 		    <button class="w3-button w3-black">Activities</button>
 		    <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -209,8 +219,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         
         </div>
-      	
-
+        
+        
       	</c:forEach>
 
             <c:forEach items="${userList}" var="BeanUser">
@@ -226,7 +236,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     </div>
 
                 </div>
-
 
             </c:forEach>
      
@@ -258,7 +267,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	
 	function sendButton(event){
 		
-		$('#wrapper').load('SearchController',{content:event.innerHTML});
+		$('#wrapper').load('MainController',{content:event.innerHTML});
 		
 	}
 	

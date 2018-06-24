@@ -84,7 +84,7 @@ public class UserUtils {
     	return result;
     }	
     
-    
+
     public static void insertUser(String username, String mail, String password) throws Exception {
 		if(!checkMailAndUsername(mail, username).next()){
 			DAO dao = new DAO();

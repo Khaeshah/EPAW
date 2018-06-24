@@ -61,12 +61,11 @@ public class SearchController extends HttpServlet {
                 if (!userList.isEmpty()){
                     request.setAttribute("userList",userList);
                 }
-            }else {
-                System.out.println("Nothing to find");
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+       
         dispatcher.forward(request, response);
 	}
 

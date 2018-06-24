@@ -98,6 +98,12 @@ public class Querys {
         return "SELECT * FROM Post where interest = '"+interest+"' AND is_public = true ORDER BY time DESC;";
     }
     
+    public static String  getAllPostsByFollow(String follower){
+    	
+        return "SELECT * FROM POST where author in (SELECT user2 FROM follow where user1 = '"+follower+"');";
+    }
+  
+    
     // Deletes
     
     public static String deletePost(Integer id){

@@ -7,10 +7,7 @@
 
 
 function sendSearch(){
-	$('#content_search_input').load('SearchController',{content:$("#search_input").val()});
-    $('#content_checkboxTweets').load('SearchController',{content:$("#checkboxTweets").val()});
-    $('#content_checkboxUsers').load('SearchController',{content:$("#checkboxUsers").val()});
-
+	$('#wrapper').load('SearchController',{search_input:$("#search_input").val(),checkboxTweets:$("#checkboxTweets").val(),checkboxUsers:$("#checkboxUsers").val()});
 }
 
 </script>
@@ -29,3 +26,13 @@ function sendSearch(){
 	
 </div>
 </body>
+
+	<!--
+	  		<div class="w3-bar">
+			  <a href="#" class="w3-button">1</a>
+			  <a href="#" class="w3-button">2</a>
+			  <a href="#" class="w3-button">3</a>
+			  <a href="#" class="w3-button">4</a>
+			  <a href="#" class="w3-button">5</a>
+			</div>
+	-->
