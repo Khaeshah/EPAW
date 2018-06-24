@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true" import="models.BeanUser" %>
+    pageEncoding="UTF-8" session="true" import="models.BeanUser, models.BeanPost" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -29,18 +29,30 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <% 
 
 	String user = "";
+	Boolean isAdmin = false;
 		if(session.getAttribute("user") != null ){
 			user = session.getAttribute("user").toString();
+
 		}
+
 
 	BeanUser userinfo = null;
 
 		if (request.getAttribute("userinfo")!=null) {
 			userinfo = (BeanUser)request.getAttribute("userinfo");
+			isAdmin = userinfo.isIs_admin();
+			//if(isAdmin == true) System.out.println("TRUE");
+			//else if(isAdmin == false) System.out.println("FALSE");
 		}
 		else {
 			userinfo = new BeanUser();
 		}
+		
+	BeanPost postinfo = null;
+	if(request.getAttribute("post") != null) {
+		
+	}
+	
 %>
 
   <!-- Begin Wrapper -->
@@ -122,8 +134,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div id="search_bar" class="w3-bar w3-black ">
     
     
-    <div class="w3-col" style="width:20%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
-    <div class="w3-col" style="width:20%">  <div class="w3-dropdown-hover">
+    <div class="w3-col" style="width:10%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
+    <div class="w3-col" style="width:15%">  <div class="w3-dropdown-hover">
 		    <button class="w3-button w3-black">Activities</button>
 		    <div class="w3-dropdown-content w3-bar-block w3-border">
 		      <button id="button_restaurant"class="w3-bar-item w3-button" onclick="sendButton(this)">Restaurants</button>
@@ -132,8 +144,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		    </div>
 		  </div> 
 	</div>
-        <div class="w3-col" style="width:50%">
-        <div class="w3-col" style="width:50%"> <a class="w3-bar-item">What do you want to search?</a> </div>
+        <div class="w3-col" style="width:400px;">
+        
 
             <jsp:include page="ViewSearch.jsp" />
 
@@ -144,7 +156,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     	 
 		  <c:if test= "${not empty user}">
 		  
-	 		<button class="w3-button w3-circle w3-teal" onclick="document.getElementById('id01').style.display='block'">+</button>	 
+	 		<button class="w3-button w3-circle w3-teal w3-show-inline-block" onclick="document.getElementById('id01').style.display='block'">+</button>	 
 	 		
 		 </c:if>
 
@@ -157,17 +169,38 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	   <jsp:include page="ViewProfile.jsp"/>
 	   
 	   <jsp:include page="ViewUserProfile.jsp"/>
+	   <jsp:include page="ViewPost.jsp"/>
 	
       	<div id="Posts"  class="w3-container w3-card w3-white w3-margin-bottom">
       	
       	<c:forEach items="${postList}" var="BeanPost">
       	
       	<div id="post${BeanPost.id}}">
-      	<!-- TODO: Admin and user should be able to delete -->
-      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
-        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}</h2>
+      	
+      	
+      	<!-- TODO: Only admin and user should be able to delete -->
+      	<!-- <c:set var="userAdmin" value="${isAdmin}"/> -->
+      	<!-- div>qwe qwe  ${isAdmin}</div>   
+      	<c:if test="${isAdmin eq true}">
+      		entro al if
 
-        
+		</c:if>
+      	-->
+      	
+      	<!-- Delete posts -->
+		<c:if test="${BeanPost.author eq user}">
+      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
+      	</c:if>
+      	
+      	<!-- Edit posts -->  
+      	<c:if test="${BeanPost.author eq user}"> 	
+      	<span onclick="editPost(${BeanPost.id})" class="w3-button" id="bEditPost">■</span>
+      	</c:if>  
+      	   	
+      	
+      	
+        <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
+
         <div class="w3-container">
           <h5 class="w3-opacity"><b>${BeanPost.content}</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanPost.eventTime} <span class="w3-tag w3-teal w3-round">  ${BeanPost.place} </span></h6>
@@ -188,7 +221,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     <div class="w3-container">
                         <h5 class="w3-opacity"><b>${BeanUser.user}</b></h5>
                         <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanUser.profilename} <span class="w3-tag w3-teal w3-round">  ${BeanUser.mail} </span></h6>
-                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanUser.phoneNumber}</span>  USER -> ${BeanUser.user    }
+                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanUser.phoneNumber}</span>  USER -> ${BeanUser.user}
                         <hr>
                     </div>
 
@@ -210,15 +243,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 
-	<div id="user_post">
+	<div id="user_post" style="display:none;">
         <h2  id="user_post_title" class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i></h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b  id="user_post_content"></b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${post.eventTime} <span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
-          <p> <span class="fake-link" style="text-decoration: underline color:blue">${post.author}</span>  posted ${post.time}</p>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>time<span class="w3-tag w3-teal w3-round">  ${post.place} </span></h6>
+          <p> <span class="fake-link" style="text-decoration: underline color:blue">name </span> posted this at </p>
           <hr>
         </div>
-        </div>
+     </div>
         
         
 	<script>
@@ -235,13 +268,32 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		
 		url ="http://localhost:8080/finalProject/UserProfileController"
 		$("#userProfile").show();
-
-		$.post(url,{content:event.innerHTML},
+	
+		
+		me = " ";
+		if (document.getElementById("user_name")) {
+			me = document.getElementById("user_name").innerText;
+		}
+	
+		if (event.innerHTML === me || me === " ")
+			document.getElementById("followbutoon").style.display="none";
+		else 
+			{document.getElementById("followbutoon").style.display="block";}
+		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
-			a = JSON.parse(response)
 
+			document.getElementById('profileposts').innerHTML = '';
+		
+			a = JSON.parse(response)
+			
+			
 			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
-			var description = document.getElementById("labe_description").innerHTML= a[1].description;
+
+
+			if (a[1].description=="null")
+				var description = document.getElementById("labe_description").innerHTML= "";
+			else
+				var description = document.getElementById("labe_description").innerHTML= a[1].description;
 			
 				if(a[2].url !="null")
 					var url = document.getElementById("user_profile").src= a[2].url;
@@ -251,33 +303,82 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			
 				var i;
 				for (i = 0; i < a[3].length; i++) { 
-					console.log(a[3][i][0]);
+				
 					
 					var div = document.getElementById('user_post');
 				    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
 					clone.id = "post"+a[3][i][0].id+ +a[3][i][0].author;
-					document.getElementById("user_post_title").innerHTML = a[3][i][0].author;
+					
+					clone.style.display="block";
+					clone.children[1].children[0].children[0].innerHTML = a[3][i][0].content;
+		
+					clone.children[0].innerHTML += a[3][i][0].title+"   ||  "+a[3][i][0].interest;
+					
+					clone.children[1].children[1].innerHTML=clone.children[1].children[1].innerHTML.replace("time",a[3][i][0].eventime+" ");
+					clone.children[1].children[1].children[1].innerHTML = a[3][i][0].place;
+					clone.children[1].children[2].children[0].innerHTML = a[3][i][0].author;
+					clone.children[1].children[2].innerHTML += a[3][i][0].time;
+
 					document.getElementById('profileposts').appendChild(clone);
 					
-					
-					
-				    
+			    
 				}
 				
 				
+				if (a[4].isFollowing=="true")
+					document.getElementById("followbutoon").innerHTML= "Following";
+				
+				
 			}
-		
-
-		);
-
-					
+		);		
 	}
 	
 	function deletePost(id) {
-		//$('#userProfile').load('ProfileController',{type:"other",content:event.innerHTML});
+		console.log(id);
 		$('#wrapper').load('DeletePostController',{postId: id})
-		//alert("Post " + id + " Eliminado!");
 	}
+	
+	function editPost(id) {
+		postide = "post" + id + "}";
+		a = document.getElementById(postide);
+		
+		// Obtenim el titol
+		title = a.children[2].innerText.split('|')[0];
+		// Obtenim el contingut
+		content = a.children[3].children[0].innerText;
+		
+		document.getElementById("idPost").innerText = id;
+		document.getElementById("titlePost").innerText = title;
+		document.getElementById("contentPost").innerText = content;
+		$('#post_modal').show();
+		
+		//$('#wrapper').load('EditPostController',{postId: id})
+	}
+	
+	  
+	  buttontest = document.getElementById("followbutoon");
+	  realvalue ="";
+
+	  	buttontest.addEventListener("mouseover", function( event ){
+	  		if (buttontest.innerText=="Following"){
+	  		realvalue = buttontest.innerText;
+	  	  	buttontest.innerText="Unfollow";
+	  	  	}
+	  	    setTimeout(function() {
+	  	 
+	  	    }, 500);
+	  	  }, false);
+	  	
+  		buttontest.addEventListener("mouseout", function( event ){
+  			realvalue = buttontest.innerText;
+  			if (buttontest.innerText=="Unfollow"){
+  		  		realvalue = buttontest.innerText;
+  		  	  	buttontest.innerText="Following";
+  		  	  	}
+	  	    setTimeout(function(){     
+	  	    }, 500);
+	  	  }, false);
+	  	
 	
 	</script>
 

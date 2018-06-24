@@ -24,6 +24,12 @@ public class PostUtils {
         result = dao.executeSQL(Querys.getAllPosts());
         return result;
     }
+    
+    public static ResultSet getPost(Integer id) throws Exception {
+        DAO dao = new DAO();
+        result = dao.executeSQL(Querys.getPost(id));
+        return result;
+    }
 
     public static ResultSet gettAllPostInterest(String interest) throws Exception {
         DAO dao = new DAO();
@@ -84,6 +90,12 @@ public class PostUtils {
     public static void insertPost(String author, String title, String content , String eventTime, String place, String time, String interest, Boolean isPublic) throws Exception {
     		DAO dao = new DAO();
    	     	dao.execute(Querys.insertPost(author, title, content, eventTime, place, time, interest, isPublic));
+    }
+    
+    public static void UpdatePostFromId(Integer id, String title, String content, String date) throws Exception {
+    	DAO dao = new DAO();    	
+    	dao.execute((Querys.UpdatePostFromId(id,title,content,date)));
+    	
     }
     
 }

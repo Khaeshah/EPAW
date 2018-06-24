@@ -1,10 +1,8 @@
 package controllers;
 
-import models.BeanPost;
-import models.BeanUser;
-import org.json.JSONObject;
-import utils.PostUtils;
-import utils.UserUtils;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+
+import utils.PostUtils;
+import utils.Querys;
+import utils.UserUtils;
+import models.BeanPost;
+import models.BeanUser;
 
 /**
  * Servlet implementation class MainController
@@ -48,22 +49,25 @@ public class MainController extends HttpServlet {
 		try {
 			
 				if(session.getAttribute("user")!=null)
-				username = (String) session.getAttribute("user");
-				user = new BeanUser();
-				user_db = UserUtils.getUser(username);
-
-				while (user_db.next()){
-                    user.setUser(user_db.getString("username"));
-                    user.setMail((user_db.getString("mail")));
-                    user.setPassword(user_db.getString("password"));
-                    user.setUrl(user_db.getString("url"));
-                    user.setDescription(user_db.getString("description"));
-                    user.setIs_admin(user_db.getBoolean("is_admin"));
-                    user.setPhoneNumber(user_db.getString("is_admin"));
-                    user.setProfilename(user_db.getString("profilename"));
-				}
-
-				ResultSet allPosts = PostUtils.getAllPosts();
+					username = (String) session.getAttribute("user");
+					user = new BeanUser();
+					user_db = UserUtils.getUser(username);
+					while (user_db.next()){
+						
+						user.setUser(user_db.getString("username"));
+						user.setMail((user_db.getString("mail")));
+						user.setPassword(user_db.getString("password"));
+						user.setUrl(user_db.getString("url"));
+						user.setDescription(user_db.getString("description"));
+						user.setIs_admin(user_db.getInt("is_admin"));
+						user.setPhoneNumber(user_db.getString("is_admin"));
+						user.setProfilename(user_db.getString("profilename"));
+					}
+					if(user.isIs_admin()) {
+						System.out.println("shit");
+						
+					}
+					ResultSet allPosts = PostUtils.getAllPosts();
 		
 					while (allPosts.next()){
 
@@ -74,9 +78,8 @@ public class MainController extends HttpServlet {
 						post.setContent(allPosts.getString("content"));
 						post.setEventTime(allPosts.getString("eventTime").replace("T", " "));
 						post.setPlace(allPosts.getString("place"));
-						String likes = allPosts.getString("likes");
-						post.setLikes(likes != null ? new JSONObject(likes) : null);
-							post.setTime(allPosts.getString("time"));
+						post.setLikes(allPosts.getInt("likes"));
+						post.setTime(allPosts.getString("time"));
 						post.setInterest(allPosts.getString("interest"));
 						post.setIs_public(allPosts.getBoolean("is_public"));
 						

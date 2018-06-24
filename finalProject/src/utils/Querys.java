@@ -59,6 +59,26 @@ public class Querys {
     	return "UPDATE user SET profilename ='"+newUsername+"', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
     }
     
+
+    //follow 
+    public static String insertFollow(String user1 , String user2){
+        return "INSERT INTO follow VALUES ('"+ user1 + "','"+user2+"');";
+    }
+    
+    public static String checkFollow(String user1 , String user2){
+    	return "SELECT * FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
+    }
+    
+    public static String deleteFollow(String user1 , String user2){
+    	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
+    }
+  
+
+    // update post
+    
+    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
+    }
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, String time, String interest, Boolean is_public){
         return "INSERT INTO Post VALUES (" +
@@ -82,7 +102,10 @@ public class Querys {
     public static String getAllPosts(){
         return "SELECT * FROM Post ORDER BY time DESC;";
     }
-
+    
+    public static String getPost(Integer id){
+        return "SELECT * FROM Post WHERE id = '" + id + "';";
+    }
     public static String getAllPublicPosts(){
         return "SELECT * FROM Post WHERE is_public = true ORDER BY time DESC;";
     }
