@@ -93,4 +93,9 @@ public class UserUtils {
         	throw new Exception(USER_EMAIL_IN_DB);
     	}
     }
+    
+    public static void deleteUser(String username) throws Exception {
+        DAO dao = new DAO();
+    	dao.execute(Querys.deleteUser(username));
+    }
 }

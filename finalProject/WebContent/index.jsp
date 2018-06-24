@@ -329,8 +329,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					clone.children[1].children[2].innerHTML += a[3][i][0].time;
 
 					document.getElementById('profileposts').appendChild(clone);
-					
-			    
 				}
 				
 				
@@ -343,7 +341,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	}
 	
 	function deletePost(id) {
-		console.log(id);
 		$('#wrapper').load('DeletePostController',{postId: id})
 	}
 	

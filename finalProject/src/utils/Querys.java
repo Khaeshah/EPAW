@@ -56,11 +56,6 @@ public class Querys {
     	return "SELECT * FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }
     
-    public static String deleteFollow(String user1 , String user2){
-    	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
-    }
-  
-
     // update post
     
     public static String UpdatePostFromId(Integer id, String title, String content, String date){
@@ -106,8 +101,17 @@ public class Querys {
     
     // Deletes
     
+    public static String deleteUser(String user){
+    	return "DELETE FROM User WHERE username = '" + user +"';";
+    }
+    
     public static String deletePost(Integer id){
     	return "DELETE FROM Post WHERE id = "+ id +";";
     }
+    
+    public static String deleteFollow(String user1 , String user2){
+    	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
+    }
+  
 }
 
