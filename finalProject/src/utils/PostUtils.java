@@ -51,7 +51,6 @@ public class PostUtils {
             post.setContent(result.getString("content"));
             post.setEventTime(result.getString("eventTime"));
             post.setPlace(result.getString("place"));
-            post.setLikes(result.getInt("likes"));
             post.setTime(result.getString("time"));
             postList.add(post);
         }
@@ -85,14 +84,14 @@ public class PostUtils {
     	return result;
     }
     */
-    public static void insertPost(String author, String title,  String content , String eventTime, String place, Integer likes, String time, String interest, Boolean isPublic) throws Exception {
+    public static void insertPost(String author, String title,  String content , String eventTime, String place, String time, String interest, Boolean isPublic) throws Exception {
     		DAO dao = new DAO();
-   	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place,likes, time,interest, isPublic));
+   	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place, time,interest, isPublic));
     }
     
     public static void UpdatePostFromId(Integer id, String title, String content, String date) throws Exception {
     	DAO dao = new DAO();    	
-    	dao.execute((Querys.UpdatePostFromId(id,title,content,date)));
+    	dao.execute((Querys.updatePostFromId(id,title,content,date)));
     	
     }
     

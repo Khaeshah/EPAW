@@ -63,12 +63,12 @@ public class Querys {
 
     // update post
     
-    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    public static String updatePostFromId(Integer id, String title, String content, String date){
     	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
     }
     // post 
-    public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){
-        return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"',"+likes+",'"+time+"','"+ interest+ "'," + is_public +");";
+    public static String insertPost(String author, String title, String content, String eventTime, String place, String time, String interest, Boolean is_public){
+        return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"', null,'"+time+"','"+ interest+ "'," + is_public +", null);";
     }
     
     public static String getPostsQueryFromName(String Username){
@@ -99,7 +99,6 @@ public class Querys {
     }
     
     // Deletes
-    
     public static String deletePost(Integer id){
     	return "DELETE FROM Post WHERE id = "+ id +";";
     }
