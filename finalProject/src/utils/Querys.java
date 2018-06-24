@@ -55,11 +55,6 @@ public class Querys {
     public static String checkFollow(String user1 , String user2){
     	return "SELECT * FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }
-    
-    public static String deleteFollow(String user1 , String user2){
-    	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
-    }
-  
 
     // update post
     
@@ -98,9 +93,28 @@ public class Querys {
         return "SELECT * FROM Post where interest = '"+interest+"' AND is_public = true ORDER BY time DESC;";
     }
     
+    public static String  getAllPostsByFollow(String follower){
+
+        return "SELECT * FROM POST where author in (SELECT user2 FROM follow where user1 = '"+follower+"');";
+    }
+
+
     // Deletes
+
+    public static String deleteUser(String user){
+        return "DELETE FROM User WHERE username = '" + user +"';";
+    }
+
     public static String deletePost(Integer id){
-    	return "DELETE FROM Post WHERE id = "+ id +";";
+        return "DELETE FROM Post WHERE id = "+ id +";";
+    }
+
+    public static String deletePostsFromUser(String userToDelete){
+        return "DELETE FROM Post WHERE author = '"+ userToDelete +"';";
+    }
+
+    public static String deleteFollow(String user1 , String user2){
+        return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }
 
     public static String getCurrentPostLikes(Integer postId) {

@@ -32,7 +32,6 @@ public class ContentController extends HttpServlet {
 		String content = (String)request.getParameter("content");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(content);
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false" import="models.BeanUser"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% 
 
@@ -39,6 +40,12 @@ function follow(event){
 	
 }
 
+function deleteUser(event){
+	userToDelete = document.getElementById("labe_username").innerHTML;
+	$('#wrapper').load('DeleteUserController',{userDel: userToDelete})	
+}
+
+
 </script>
 
 <div id="userProfile" class="w3-modal">
@@ -63,8 +70,10 @@ function follow(event){
 		  	</div>
 		  	<div class="w3-container w3-half">
 		  	
-		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge" onclick="follow(this);">Follow</button>
-
+		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="follow(this);">Follow</button>
+			<c:if test="${userinfo.is_admin eq true}">
+				<button id="deleteButton" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="deleteUser(this);">Delete User</button>
+			</c:if>
 		  	<img id=user_profile class= "image-cropper" src="" >
 
 		  </div>

@@ -84,7 +84,7 @@ public class UserUtils {
     	return result;
     }	
     
-    
+
     public static void insertUser(String username, String mail, String password) throws Exception {
 		if(!checkMailAndUsername(mail, username).next()){
 			DAO dao = new DAO();
@@ -92,5 +92,10 @@ public class UserUtils {
 		}else {
         	throw new Exception(USER_EMAIL_IN_DB);
     	}
+    }
+    
+    public static void deleteUser(String username) throws Exception {
+        DAO dao = new DAO();
+    	dao.execute(Querys.deleteUser(username));
     }
 }

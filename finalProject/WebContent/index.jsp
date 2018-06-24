@@ -27,31 +27,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 <% 
-
 	String user = "";
-	//Boolean isAdmin = false;
 		if(session.getAttribute("user") != null ){
 			user = session.getAttribute("user").toString();
-
 		}
-
 
 	BeanUser userinfo = null;
 		if (request.getAttribute("userinfo")!=null) {
 			userinfo = (BeanUser)request.getAttribute("userinfo");
-			//isAdmin = userinfo.isIs_admin();
-			//if(isAdmin == true) System.out.println("IM A FUCKING ADMIN");
-			//else if(isAdmin == false) System.out.println("IM A POOR USER");
 		}
 		else {
 			userinfo = new BeanUser();
 		}
-		
-	BeanPost postinfo = null;
-	if(request.getAttribute("post") != null) {
-		
-	}
-	
 %>
 
   <!-- Begin Wrapper -->
@@ -133,7 +120,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div id="search_bar" class="w3-bar w3-black ">
     
     
-    <div class="w3-col" style="width:10%"> <a class="w3-bar-item w3-button w3-mobile" href="MainController">Home</a> </div>  
+     <div class="w3-col" style="width:10%">  <div class="w3-dropdown-hover">
+     		
+		    <button class="w3-button w3-black" onclick="sendButton(this)">Home</button>
+		    
+			     <c:if test= "${not empty user}">
+			    <div class="w3-dropdown-content w3-bar-block w3-border">
+			    	<button class="w3-bar-item w3-button" onclick="sendButton(this)">Subscription</button> 
+			    </div>
+			    </c:if>
+		  </div> 
+	</div>
     <div class="w3-col" style="width:15%">  <div class="w3-dropdown-hover">
 		    <button class="w3-button w3-black">Activities</button>
 		    <div class="w3-dropdown-content w3-bar-block w3-border">
@@ -156,11 +153,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		  <c:if test= "${not empty user}">
 		  
 	 		<button class="w3-button w3-circle w3-teal w3-show-inline-block" onclick="document.getElementById('id01').style.display='block'">+</button>	 
-	 		
 		 </c:if>
-
 	</div>
-		    
 	</div>
 	
 	   <jsp:include page="ViewPostModal.jsp" />
@@ -211,15 +205,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <hr>
         </div>
         </div>
-      	
-
+        
       	</c:forEach>
-
             <c:forEach items="${userList}" var="BeanUser">
-
                 <div id="post${BeanUser.user}}">
                     <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanUser.profilename}</h2>
-
                     <div class="w3-container">
                         <h5 class="w3-opacity"><b>${BeanUser.user}</b></h5>
                         <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanUser.profilename} <span class="w3-tag w3-teal w3-round">  ${BeanUser.mail} </span></h6>
@@ -228,7 +218,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     </div>
 
                 </div>
-
 
             </c:forEach>
      
@@ -260,7 +249,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	
 	function sendButton(event){
 		
-		$('#wrapper').load('SearchController',{content:event.innerHTML});
+		$('#wrapper').load('MainController',{content:event.innerHTML});
 		
 	}
 	
@@ -280,7 +269,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		if (event.innerHTML === me || me === " ")
 			document.getElementById("followbutoon").style.display="none";
 		else 
-			{document.getElementById("followbutoon").style.display="block";}
+			{document.getElementById("followbutoon").style.display="inline";}
 		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
 
@@ -322,21 +311,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 					clone.children[1].children[2].innerHTML += a[3][i][0].time;
 
 					document.getElementById('profileposts').appendChild(clone);
-					
-			    
 				}
 				
 				
 				if (a[4].isFollowing=="true")
 					document.getElementById("followbutoon").innerHTML= "Following";
-				
-				
 			}
 		);		
 	}
 	
 	function deletePost(id) {
-		console.log(id);
 		$('#wrapper').load('DeletePostController',{postId: id})
 	}
 	
@@ -353,8 +337,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		document.getElementById("titlePost").innerText = title;
 		document.getElementById("contentPost").innerText = content;
 		$('#post_modal').show();
-		
-		//$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
 	  
@@ -380,11 +362,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	  	    setTimeout(function(){     
 	  	    }, 500);
 	  	  }, false);
-	  	
-	
 	</script>
-
-
 </body>
 
 </html>

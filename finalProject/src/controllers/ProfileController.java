@@ -75,7 +75,7 @@ public class ProfileController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 		request.setAttribute("userinfo",user);
 		dispatcher.forward(request, response);	
 		

@@ -16,18 +16,19 @@ import org.apache.commons.beanutils.BeanUtils;
 import models.BeanPost;
 import utils.PostUtils;
 import utils.Querys;
+import utils.UserUtils;
 
 /**
- * Servlet implementation class DeletePostController
+ * Servlet implementation class DeleteUserController
  */
-@WebServlet("/DeletePostController")
-public class DeletePostController extends HttpServlet {
+@WebServlet("/DeleteUserController")
+public class DeleteUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletePostController() {
+    public DeleteUserController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,23 +39,22 @@ public class DeletePostController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
-		Integer id = Integer.parseInt(request.getParameter("postId").toString());
+		String userToDelete = request.getParameter("userDel").toString();
 
 		RequestDispatcher dispatcher = null;
-		   try {	   
-			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
-			   if(id != -1) PostUtils.deletePost(id);
-
-			   request.setAttribute("id",id);
+		   try {
+			   dispatcher = request.getRequestDispatcher("ViewUserDeleteDone.jsp");
+			   if(userToDelete != "") {
+				   // Borrem usuari i els posts que ha fet
+				   UserUtils.deleteUser(userToDelete);
+				   PostUtils.deletePostsFromUser(userToDelete);
+			   }
 			   dispatcher.forward(request, response);
-		   
-	
 		   } catch (Exception exception) {
-					if(dispatcher != null){
-						dispatcher.forward(request, response);
-					}
-
+				if(dispatcher != null){
+					dispatcher.forward(request, response);
 				}
+			}
 	}
 
 	/**
