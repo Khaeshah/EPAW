@@ -33,8 +33,7 @@ public class UserUtils {
             BeanUser user = new BeanUser();
             user.setUser(result.getString("username"));
             user.setMail(result.getString("mail"));
-            //user.set(result.getString("description"));
-            //user.setUser(result.getString("phoneNumber"));
+            user.setUrl(result.getString("url"));
             userList.add(user);
         }
         return userList;

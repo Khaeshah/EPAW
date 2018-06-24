@@ -86,11 +86,11 @@ public class Querys {
     }
 
     public static String getAllPostFromContentLike(String content){
-        return "SELECT * FROM Post where content like '%"+ content +"%' ORDER BY time DESC;";
+        return "SELECT * FROM Post where content like '%"+ content +"%' or author like '%"+ content +"%' or interest like '%"+ content +"%' or title like '%"+ content +"%' ORDER BY time DESC;";
     }
 
     public static String getAllPublicPostInterest(String interest){
-        return "SELECT * FROM Post where interest = '"+interest+"' AND is_public = true ORDER BY time DESC;";
+        return "SELECT * FROM Post where interest = '"+interest+"' ORDER BY time DESC;";
     }
     
     public static String  getAllPostsByFollow(String follower){

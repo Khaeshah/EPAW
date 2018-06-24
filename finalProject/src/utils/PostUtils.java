@@ -49,6 +49,7 @@ public class PostUtils {
             post.setId(result.getInt("id"));
             post.setAuthor(result.getString("author"));
             post.setTitle(result.getString("title"));
+            post.setInterest(result.getString("interest"));
             post.setContent(result.getString("content"));
             post.setEventTime(result.getString("eventTime"));
             post.setPlace(result.getString("place"));
@@ -58,10 +59,27 @@ public class PostUtils {
         return postList;
     }
 
-    public static ResultSet getAllPostInterest(String interest) throws Exception {
+    public static List<BeanPost> getAllPostInterest(String interest) throws Exception {
         DAO dao = new DAO();
         result = dao.executeSQL(Querys.getAllPostInterest(interest));
-        return result;
+        
+        List<BeanPost> postList = new ArrayList<>();
+
+        while (result.next()){
+            System.out.println(result.toString());
+            BeanPost post = new BeanPost();
+            post.setId(result.getInt("id"));
+            post.setAuthor(result.getString("author"));
+            post.setTitle(result.getString("title"));
+            post.setInterest(result.getString("interest"));
+            post.setContent(result.getString("content"));
+            post.setEventTime(result.getString("eventTime"));
+            post.setPlace(result.getString("place"));
+            post.setTime(result.getString("time"));
+            postList.add(post);
+        }
+        return postList;
+        
     }
     
     public static void deletePost(Integer id) throws Exception {
