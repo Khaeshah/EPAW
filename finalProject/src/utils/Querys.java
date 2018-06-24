@@ -109,6 +109,10 @@ public class Querys {
     	return "DELETE FROM Post WHERE id = "+ id +";";
     }
     
+    public static String deletePostsFromUser(String userToDelete){
+    	return "DELETE FROM Post WHERE author = '"+ userToDelete +"';";
+    }
+    
     public static String deleteFollow(String user1 , String user2){
     	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }

@@ -43,8 +43,12 @@ public class DeleteUserController extends HttpServlet {
 
 		RequestDispatcher dispatcher = null;
 		   try {
-			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
-			   if(userToDelete != "") UserUtils.deleteUser(userToDelete);
+			   dispatcher = request.getRequestDispatcher("ViewUserDeleteDone.jsp");
+			   if(userToDelete != "") {
+				   // Borrem usuari i els posts que ha fet
+				   UserUtils.deleteUser(userToDelete);
+				   PostUtils.deletePostsFromUser(userToDelete);
+			   }
 			   dispatcher.forward(request, response);
 		   } catch (Exception exception) {
 				if(dispatcher != null){

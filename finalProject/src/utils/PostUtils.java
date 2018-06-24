@@ -67,12 +67,12 @@ public class PostUtils {
     public static void deletePost(Integer id) throws Exception {
         DAO dao = new DAO();
     	dao.execute(Querys.deletePost(id));
-    	
-        //result = dao.executeSQL(Querys.deletePost(id));
-        //return result;
     }
     
-   
+    public static void deletePostsFromUser(String userToDelete) throws Exception {
+        DAO dao = new DAO();
+    	dao.execute(Querys.deletePostsFromUser(userToDelete));
+    }   
  
     public static ResultSet getAllPostsByFollow(String follower) throws Exception {
     	DAO dao = new DAO();
