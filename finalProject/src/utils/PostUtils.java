@@ -72,19 +72,14 @@ public class PostUtils {
         //return result;
     }
     
-    /*
-    private static ResultSet checkMailAndUsername(String mail, String username) throws Exception {
+   
+ 
+    public static ResultSet getAllPostsByFollow(String follower) throws Exception {
     	DAO dao = new DAO();
-    	result = dao.executeSQL(Querys.getUserQueryFromEmailAndUsername(username, mail));
+    	result = dao.executeSQL((Querys.getAllPostsByFollow(follower)));
     	return result;
-    }
+    }	
     
-    public static ResultSet checkUsernameAndPassword(String username, String password) throws Exception {
-    	DAO dao = new DAO();
-    	result = dao.executeSQL(Querys.getUserQueryFromUsernameAndPassword(username, password));
-    	return result;
-    }
-    */
     public static void insertPost(String author, String title,  String content , String eventTime, String place, Integer likes, String time, String interest, Boolean isPublic) throws Exception {
     		DAO dao = new DAO();
    	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place,likes, time,interest, isPublic));
