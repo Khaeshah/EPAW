@@ -1,6 +1,5 @@
 package controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import utils.PostUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -9,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -40,7 +38,7 @@ public class LikesController extends HttpServlet {
         }
 
         request.setAttribute("currentLikes",likes);
-        dispatcher.forward(request, response);
+        response.sendRedirect("/MainController");
     }
 
     /**
