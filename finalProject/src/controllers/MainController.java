@@ -1,8 +1,9 @@
 package controllers;
 
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import models.BeanPost;
+import models.BeanUser;
+import utils.PostUtils;
+import utils.UserUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import utils.PostUtils;
-import utils.Querys;
-import utils.UserUtils;
-import models.BeanPost;
-import models.BeanUser;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class MainController

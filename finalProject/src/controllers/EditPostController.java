@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
@@ -15,10 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanPost;
-import models.BeanUser;
 import utils.PostUtils;
-import utils.Querys;
-import utils.UserUtils;
 
 /**
  * Servlet implementation class EditPostController
@@ -53,7 +49,7 @@ public class EditPostController extends HttpServlet {
 				   time = splitedtime[0]+ " " +splitedtime[1];
 			   }
 			   
-			   PostUtils.UpdatePostFromId(post.getId(),post.getTitle(),post.getContent(),time);
+			   PostUtils.updatePostFromId(post.getId(),post.getTitle(),post.getContent(),time);
 
 			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
 			   request.setAttribute("post",post);

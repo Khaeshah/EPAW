@@ -2,6 +2,7 @@ package utils;
 
 import models.BeanPost;
 import models.DAO;
+import org.json.JSONObject;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -89,10 +90,37 @@ public class PostUtils {
    	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place, time,interest, isPublic));
     }
     
-    public static void UpdatePostFromId(Integer id, String title, String content, String date) throws Exception {
+    public static void updatePostFromId(Integer id, String title, String content, String date) throws Exception {
     	DAO dao = new DAO();    	
     	dao.execute((Querys.updatePostFromId(id,title,content,date)));
     	
     }
-    
+
+    private static JSONObject getLikesFromPost(Integer postId) throws Exception {
+        DAO dao = new DAO();
+        result = dao.executeSQL(Querys.getCurrentPostLikes(postId));
+        JSONObject likes = new JSONObject();
+        while (result.next()){
+            likes = new JSONObject(result.getString("likes"));
+        }
+
+        return likes;
+
+    }
+
+    public static Integer getCurrentPostLikes(Integer postId, Boolean addLike) throws Exception {
+
+        JSONObject likes = getLikesFromPost(postId);
+        if(addLike){
+            likes.put("totalLikes", likes.getInt("totalLikes") + 1);
+            saveLikes(postId, likes);
+            return likes.getInt("totalLikes");
+        }
+        return likes.getInt("totalLikes");
+    }
+
+    private static void saveLikes(Integer postId, JSONObject likes) throws Exception {
+        DAO dao = new DAO();
+        dao.execute((Querys.updatePostLikes(postId,likes.toString())));
+    }
 }

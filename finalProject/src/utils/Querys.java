@@ -68,7 +68,7 @@ public class Querys {
     }
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, String time, String interest, Boolean is_public){
-        return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"', null,'"+time+"','"+ interest+ "'," + is_public +", null);";
+        return "INSERT INTO Post (author, title, content, eventTime, place, time, interest, is_public) VALUES ('"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"','"+time+"','"+ interest+ "'," + is_public +");";
     }
     
     public static String getPostsQueryFromName(String Username){
@@ -102,5 +102,12 @@ public class Querys {
     public static String deletePost(Integer id){
     	return "DELETE FROM Post WHERE id = "+ id +";";
     }
-}
 
+    public static String getCurrentPostLikes(Integer postId) {
+        return "SELECT likes FROM Post WHERE id = " + postId + ";";
+    }
+
+    public static String updatePostLikes (Integer postId, String likes){
+        return "UPDATE Post SET likes = '" + likes + "' WHERE id = " + postId + ";";
+    }
+}
