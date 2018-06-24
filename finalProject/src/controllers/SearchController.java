@@ -16,6 +16,12 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+
 /**
  * Servlet implementation class MainController
  */
@@ -46,7 +52,13 @@ public class SearchController extends HttpServlet {
    
         PrintWriter out = response.getWriter();
         
-       
+        JSONObject allEmps=new JSONObject();
+        /*
+        Gson gson = new Gson();
+        String element = gson.toJson(
+                groupsList,
+        new TypeToken<ArrayList<GroupItem>>() {}.getType());
+        */
         try {
             if(!searchQuery.equals("") && !checkboxTweets.equals("true") && !checkboxUsers.equals("true")){
                 postList = PostUtils.getAllPostFromContentLike(searchQuery);
