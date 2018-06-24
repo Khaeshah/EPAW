@@ -79,7 +79,7 @@ public class PostUtils {
     	result = dao.executeSQL((Querys.getAllPostsByFollow(follower)));
     	return result;
     }
-    public static void insertPost(String author, String title,  String content , String eventTime, String place, Integer likes, String time, String interest, Boolean isPublic) throws Exception {
+    public static void insertPost(String author, String title,  String content , String eventTime, String place, String time, String interest, Boolean isPublic) throws Exception {
     		DAO dao = new DAO();
    	     	dao.execute(Querys.insertPost(author,title,content,eventTime,place, time,interest, isPublic));
     }

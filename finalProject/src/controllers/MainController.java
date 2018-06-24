@@ -3,6 +3,7 @@ package controllers;
 import models.BeanPost;
 import models.BeanUser;
 import utils.PostUtils;
+import utils.Querys;
 import utils.UserUtils;
 
 import javax.servlet.RequestDispatcher;
