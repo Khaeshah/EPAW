@@ -27,31 +27,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 <% 
-
 	String user = "";
-	//Boolean isAdmin = false;
 		if(session.getAttribute("user") != null ){
 			user = session.getAttribute("user").toString();
-
 		}
-
 
 	BeanUser userinfo = null;
 		if (request.getAttribute("userinfo")!=null) {
 			userinfo = (BeanUser)request.getAttribute("userinfo");
-			//isAdmin = userinfo.isIs_admin();
-			//if(isAdmin == true) System.out.println("IM A FUCKING ADMIN");
-			//else if(isAdmin == false) System.out.println("IM A POOR USER");
 		}
 		else {
 			userinfo = new BeanUser();
 		}
-		
-	BeanPost postinfo = null;
-	if(request.getAttribute("post") != null) {
-		
-	}
-	
 %>
 
   <!-- Begin Wrapper -->
@@ -166,11 +153,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		  <c:if test= "${not empty user}">
 		  
 	 		<button class="w3-button w3-circle w3-teal w3-show-inline-block" onclick="document.getElementById('id01').style.display='block'">+</button>	 
-	 		
 		 </c:if>
-
 	</div>
-		    
 	</div>
 	
 	   <jsp:include page="ViewPostModal.jsp" />
@@ -217,17 +201,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
            <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">${BeanPost.author}</span>  posted ${BeanPost.time}
           <hr>
         </div>
-        
         </div>
         
-        
       	</c:forEach>
-
             <c:forEach items="${userList}" var="BeanUser">
-
                 <div id="post${BeanUser.user}}">
                     <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanUser.profilename}</h2>
-
                     <div class="w3-container">
                         <h5 class="w3-opacity"><b>${BeanUser.user}</b></h5>
                         <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${BeanUser.profilename} <span class="w3-tag w3-teal w3-round">  ${BeanUser.mail} </span></h6>
@@ -287,7 +266,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		if (event.innerHTML === me || me === " ")
 			document.getElementById("followbutoon").style.display="none";
 		else 
-			{document.getElementById("followbutoon").style.display="block";}
+			{document.getElementById("followbutoon").style.display="inline";}
 		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
 
@@ -334,8 +313,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 				
 				if (a[4].isFollowing=="true")
 					document.getElementById("followbutoon").innerHTML= "Following";
-				
-				
 			}
 		);		
 	}
@@ -357,8 +334,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		document.getElementById("titlePost").innerText = title;
 		document.getElementById("contentPost").innerText = content;
 		$('#post_modal').show();
-		
-		//$('#wrapper').load('EditPostController',{postId: id})
 	}
 	
 	  
@@ -384,11 +359,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	  	    setTimeout(function(){     
 	  	    }, 500);
 	  	  }, false);
-	  	
-	
 	</script>
-
-
 </body>
 
 </html>

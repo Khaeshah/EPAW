@@ -70,9 +70,9 @@ function deleteUser(event){
 		  	</div>
 		  	<div class="w3-container w3-half">
 		  	
-		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge" onclick="follow(this);">Follow</button>
+		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="follow(this);">Follow</button>
 			<c:if test="${userinfo.is_admin eq true}">
-				<button id="deleteButton" class="w3-btn w3-teal w3-round-xlarge" onclick="deleteUser(this);">Delete User</button>
+				<button id="deleteButton" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="deleteUser(this);">Delete User</button>
 			</c:if>
 		  	<img id=user_profile class= "image-cropper" src="" >
 

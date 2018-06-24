@@ -41,11 +41,8 @@ public class DeletePostController extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("postId").toString());
 
 		RequestDispatcher dispatcher = null;
-		   try {
-			   
-			   
+		   try {	   
 			   dispatcher = request.getRequestDispatcher("ViewDeleteDone.jsp");
-			   //System.out.println(Querys.deletePost(id));
 			   if(id != -1) PostUtils.deletePost(id);
 
 			   request.setAttribute("id",id);
