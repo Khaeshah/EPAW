@@ -30,6 +30,8 @@ public class LikesController extends HttpServlet {
         Integer postId = params.containsKey("submitLikeHide") ? Integer.parseInt(params.get("submitLikeHide")[0]) : null;
         Boolean addLike = params.containsKey("addLike") && Boolean.parseBoolean(params.get("addLike")[0]);
         Integer likes = null;
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/MainController");
+
         try {
             likes = PostUtils.getCurrentPostLikes(postId, addLike);
 
@@ -37,7 +39,6 @@ public class LikesController extends HttpServlet {
             e.printStackTrace();
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         request.setAttribute("currentLikes",likes);
         dispatcher.forward(request, response);
     }
