@@ -29,7 +29,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <% 
 
 	String user = "";
-	Boolean isAdmin = false;
+	//Boolean isAdmin = false;
 		if(session.getAttribute("user") != null ){
 			user = session.getAttribute("user").toString();
 
@@ -37,12 +37,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 	BeanUser userinfo = null;
-
 		if (request.getAttribute("userinfo")!=null) {
 			userinfo = (BeanUser)request.getAttribute("userinfo");
-			isAdmin = userinfo.isIs_admin();
-			//if(isAdmin == true) System.out.println("TRUE");
-			//else if(isAdmin == false) System.out.println("FALSE");
+			//isAdmin = userinfo.isIs_admin();
+			//if(isAdmin == true) System.out.println("IM A FUCKING ADMIN");
+			//else if(isAdmin == false) System.out.println("IM A POOR USER");
 		}
 		else {
 			userinfo = new BeanUser();
@@ -188,26 +187,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       	<div id="post${BeanPost.id}}">
       	
       	
-      	<!-- TODO: Only admin and user should be able to delete -->
-      	<!-- <c:set var="userAdmin" value="${isAdmin}"/> -->
-      	<!-- div>qwe qwe  ${isAdmin}</div>   
-      	<c:if test="${isAdmin eq true}">
-      		entro al if
-
-		</c:if>
-      	-->
+      	<!-- Admin can delete or edit all posts.
+      		 Users can only delete their own posts
+   		-->
+      	<c:choose>
+    		<c:when test="${userinfo.is_admin eq true}">
+    			<!-- Delete and Edit posts -->
+        		<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
+        		<span onclick="editPost(${BeanPost.id})" class="w3-button" id="bEditPost">■</span>
+    		</c:when>    
+    		<c:otherwise>
+	        	<!-- Delete posts -->
+				<c:if test="${BeanPost.author eq user}">
+      				<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
+      			</c:if>
       	
-      	<!-- Delete posts -->
-		<c:if test="${BeanPost.author eq user}">
-      	<span onclick="deletePost(${BeanPost.id})" class="w3-button" >&times;</span>
-      	</c:if>
-      	
-      	<!-- Edit posts -->  
-      	<c:if test="${BeanPost.author eq user}"> 	
-      	<span onclick="editPost(${BeanPost.id})" class="w3-button" id="bEditPost">■</span>
-      	</c:if>  
-      	   	
-      	
+      			<!-- Edit posts -->  
+      			<c:if test="${BeanPost.author eq user}"> 	
+      				<span onclick="editPost(${BeanPost.id})" class="w3-button" id="bEditPost">■</span>
+      			</c:if>  
+    		</c:otherwise>
+		</c:choose>
       	
         <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanPost.title}  ||  ${BeanPost.interest} </h2>
 
