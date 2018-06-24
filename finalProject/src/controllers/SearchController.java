@@ -12,8 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+
 
 /**
  * Servlet implementation class MainController
@@ -36,37 +44,44 @@ public class SearchController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Map<String, String[]> params = request.getParameterMap();
+
         List<BeanPost> postList;
         List<BeanUser> userList;
-
-        String searchQuery = params.containsKey("search") ? !params.get("search")[0].equals("") ? params.get("search")[0] : null : null;
-        String checkboxTweets = params.containsKey("checkboxTweets") ? params.get("checkboxTweets")[0] : null;
-        String checkboxUsers = params.containsKey("checkboxUsers") ? params.get("checkboxUsers")[0] : null;
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        String searchQuery = (String)request.getParameter("search_input");
+        String checkboxTweets = (String)request.getParameter("checkboxTweets");
+        String checkboxUsers = (String)request.getParameter("checkboxUsers");
+   
+        PrintWriter out = response.getWriter();
+        
+        JSONObject allEmps=new JSONObject();
+        /*
+        Gson gson = new Gson();
+        String element = gson.toJson(
+                groupsList,
+        new TypeToken<ArrayList<GroupItem>>() {}.getType());
+        */
         try {
-            if(searchQuery != null && checkboxTweets != null && checkboxUsers != null){
+            if(!searchQuery.equals("") && !checkboxTweets.equals("true") && !checkboxUsers.equals("true")){
                 postList = PostUtils.getAllPostFromContentLike(searchQuery);
                 userList = UserUtils.getUsersLike(searchQuery);
-                request.setAttribute("postList",postList);
-                request.setAttribute("userList",userList);
-            }else if(searchQuery != null && checkboxTweets != null && checkboxUsers == null){
+
+                out.println( "hello wold");
+            }else if(!searchQuery.equals("") && !checkboxTweets.equals("true") && !checkboxUsers.equals("false")){
                 postList = PostUtils.getAllPostFromContentLike(searchQuery);
                 if(!postList.isEmpty()) {
-                    request.setAttribute("postList",postList);
+                	  out.println( searchQuery);
                 }
-            }else if(searchQuery != null && checkboxTweets == null && checkboxUsers != null){
+            }else if(!searchQuery.equals("") && !checkboxTweets.equals("false") && !checkboxUsers.equals("true")){
                 userList = UserUtils.getUsersLike(searchQuery);
                 if (!userList.isEmpty()){
-                    request.setAttribute("userList",userList);
+                	  out.println( searchQuery);
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
        
-        dispatcher.forward(request, response);
+       
 	}
 
 	/**
