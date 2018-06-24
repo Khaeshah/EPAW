@@ -55,15 +55,15 @@ public class Querys {
     public static String checkFollow(String user1 , String user2){
     	return "SELECT * FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }
-    
+
     // update post
     
-    public static String UpdatePostFromId(Integer id, String title, String content, String date){
+    public static String updatePostFromId(Integer id, String title, String content, String date){
     	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
     }
     // post 
-    public static String insertPost(String author, String title, String content, String eventTime, String place, Integer likes, String time, String interest, Boolean is_public){
-        return "INSERT INTO Post VALUES (null,'"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"',"+likes+",'"+time+"','"+ interest+ "'," + is_public +");";
+    public static String insertPost(String author, String title, String content, String eventTime, String place, String time, String interest, Boolean is_public){
+        return "INSERT INTO Post (author, title, content, eventTime, place, time, interest, is_public) VALUES ('"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"','"+time+"','"+ interest+ "'," + is_public +");";
     }
     
     public static String getPostsQueryFromName(String Username){
@@ -94,28 +94,34 @@ public class Querys {
     }
     
     public static String  getAllPostsByFollow(String follower){
-    	
+
         return "SELECT * FROM POST where author in (SELECT user2 FROM follow where user1 = '"+follower+"');";
     }
-  
-    
-    // Deletes
-    
-    public static String deleteUser(String user){
-    	return "DELETE FROM User WHERE username = '" + user +"';";
-    }
-    
-    public static String deletePost(Integer id){
-    	return "DELETE FROM Post WHERE id = "+ id +";";
-    }
-    
-    public static String deletePostsFromUser(String userToDelete){
-    	return "DELETE FROM Post WHERE author = '"+ userToDelete +"';";
-    }
-    
-    public static String deleteFollow(String user1 , String user2){
-    	return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
-    }
-  
-}
 
+
+    // Deletes
+
+    public static String deleteUser(String user){
+        return "DELETE FROM User WHERE username = '" + user +"';";
+    }
+
+    public static String deletePost(Integer id){
+        return "DELETE FROM Post WHERE id = "+ id +";";
+    }
+
+    public static String deletePostsFromUser(String userToDelete){
+        return "DELETE FROM Post WHERE author = '"+ userToDelete +"';";
+    }
+
+    public static String deleteFollow(String user1 , String user2){
+        return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
+    }
+
+    public static String getCurrentPostLikes(Integer postId) {
+        return "SELECT likes FROM Post WHERE id = " + postId + ";";
+    }
+
+    public static String updatePostLikes (Integer postId, String likes){
+        return "UPDATE Post SET likes = '" + likes + "' WHERE id = " + postId + ";";
+    }
+}

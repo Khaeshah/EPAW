@@ -54,8 +54,6 @@ public class PostController extends HttpServlet {
 		post.setAuthor(user);
 		post.setTime(time);
 		RequestDispatcher dispatcher = null;
-		post.setLikes(0);
-	
 		
 		   try {
 				
@@ -70,7 +68,6 @@ public class PostController extends HttpServlet {
 						   post.getContent(),
 						   post.getEventTime(),
 						   post.getPlace(),
-						   post.getLikes(),
 						   post.getTime(),
 						   post.getInterest(),
 						   post.getIs_public());
