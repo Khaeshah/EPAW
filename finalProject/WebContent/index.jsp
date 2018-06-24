@@ -131,16 +131,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			    </c:if>
 		  </div> 
 	</div>
-    <div class="w3-col" style="width:15%">  <div class="w3-dropdown-hover">
-		    <button class="w3-button w3-black">Activities</button>
-		    <div class="w3-dropdown-content w3-bar-block w3-border">
-		      <button id="button_restaurant"class="w3-bar-item w3-button" onclick="sendButton(this)">Restaurants</button>
-		      <button id="button_movie" class="w3-bar-item w3-button" onclick="sendButton(this)">Movie</button>
-		      <button id="button_disco" class="w3-bar-item w3-button" onclick="sendButton(this)">Parties</button>
-		    </div>
-		  </div> 
-	</div>
-        <div class="w3-col" style="width:400px;">
+        <div class="w3-col" style="width:80%;">
         
 
             <jsp:include page="ViewSearch.jsp" />
@@ -261,12 +252,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 		$("#userProfile").show();
 	
 		
-		me = " ";
+		me = "";
 		if (document.getElementById("user_name")) {
 			me = document.getElementById("user_name").innerText;
 		}
 	
-		if (event.innerHTML === me || me === " ")
+		if (event.innerHTML === me || me === "")
 			document.getElementById("followbutoon").style.display="none";
 		else 
 			{document.getElementById("followbutoon").style.display="inline";}

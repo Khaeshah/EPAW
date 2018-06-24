@@ -23,58 +23,100 @@ function openTab(cityName) {
 }
 
 
+function isEmpty(a) {
+    for(var prop in a) {
+        if(a.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+    
+}
+
 function sendSearch(){
 	$('#searchresult').show();
 	
 	url ="http://localhost:8080/finalProject/SearchController"
 
-	$.post(url,{search_input:$("#search_input").val(),checkboxTweets:$("#checkboxTweets").is(':checked'),checkboxUsers:$("#checkboxUsers").is(':checked')},
-			
+	$.post(url,{search_input:$("#search_input").val(),
+			checkboxTweets:$("#checkboxTweets").is(':checked'),
+			checkboxUsers:$("#checkboxUsers").is(':checked')},
 			function(response){
-
-			//document.getElementById('profileposts').innerHTML = '';
-			
-			console.log(response);
-			/*
-			a = JSON.parse(response)
-			
-			
-			var usarname = document.getElementById("labe_username").innerHTML= a[0].username;
-
-			if (a[1].description=="null")
-				var description = document.getElementById("labe_description").innerHTML= "";
-			else
-				var description = document.getElementById("labe_description").innerHTML= a[1].description;
-			
-				if(a[2].url !="null")
-					var url = document.getElementById("user_profile").src= a[2].url;
-				else 
-					var url = document.getElementById("user_profile").src= "images/profile.png";
-				
-			
-				var i;
-				for (i = 0; i < a[3].length; i++) { 
-				
-					
-					var div = document.getElementById('user_post');
-				    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-					clone.id = "post"+a[3][i][0].id+ +a[3][i][0].author;
-					
-					clone.style.display="block";
-					clone.children[1].children[0].children[0].innerHTML = a[3][i][0].content;
 		
-					clone.children[0].innerHTML += a[3][i][0].title+"   ||  "+a[3][i][0].interest;
+			document.getElementById("notfoundimage").style.display="none";
+		
+			if(response){
+			
+			a = JSON.parse(response);
+			document.getElementById('SearchPosts').innerHTML = '';
+			document.getElementById('SearchUsers').innerHTML = '';
+			var i,j;
+			var foundcontent =0;
+			for (i = 0; i < a.length; i++) { 
+				if(!isEmpty(a[i])){
 					
-					clone.children[1].children[1].innerHTML=clone.children[1].children[1].innerHTML.replace("time",a[3][i][0].eventime+" ");
-					clone.children[1].children[1].children[1].innerHTML = a[3][i][0].place;
-					clone.children[1].children[2].children[0].innerHTML = a[3][i][0].author;
-					clone.children[1].children[2].innerHTML += a[3][i][0].time;
+					if(i==0){
+					
+						for (j = 0; j < a[i].length; j++ ){
+							
+							
+							var div = document.getElementById('user_post');
+						    clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+							clone.id = "searchpost"+a[i][j].id+ +a[i][j].author;
+							
+							clone.style.display="block";
+							clone.children[1].children[0].children[0].innerHTML = a[i][j].content;
+				
+							clone.children[0].innerHTML += a[i][j].title+"   ||  "+a[i][j].interest;
+							
+							clone.children[1].children[1].innerHTML=clone.children[1].children[1].innerHTML.replace("time",a[i][j].eventime+" ");
+							clone.children[1].children[1].children[1].innerHTML = a[i][j].place;
+							clone.children[1].children[2].children[0].innerHTML = a[i][j].author;
+							clone.children[1].children[2].innerHTML += a[i][j].time;
 
-					document.getElementById('profileposts').appendChild(clone);
-					
-			    
+							document.getElementById("SearchPosts").appendChild(clone);
+
+							
+						}
 					}
-				*/
+					else if(i==1){
+						for (j = 0; j < a[i].length; j++ ){
+							var div = document.getElementById("search_user");
+							clone = div.cloneNode(true);
+							clone.style.display="block";
+							clone.children[1].children[0].innerText=a[i][j].user;
+							clone.children[1].children[1].innerText=a[i][j].description;
+							if(!a[i][j].hasOwnProperty("url"))
+								clone.children[0].src="images/profile.png";
+							else {clone.children[0].src=a[i][j].url;}
+	
+							document.getElementById('SearchUsers').appendChild(clone);
+							
+							}
+					}
+				}
+					else if(isEmpty(a[i])&&i==0){
+						
+						document.getElementById("SearchPosts").innerHTML="";
+						img = document.getElementById("notfoundimage");
+						clone2 = img.cloneNode(true);
+						clone2.style.display="block";
+						document.getElementById("SearchPosts").append(clone2);
+					}
+					
+					else if(isEmpty(a[i])&&i==1){
+						
+						document.getElementById("SearchUsers").innerHTML="";
+						img = document.getElementById("notfoundimage");
+						clone2 = img.cloneNode(true);
+						clone2.style.display="block";
+						document.getElementById("SearchUsers").append(clone2);
+						
+					}
+			}
+		
+			}
+
+
 			}
 		);		
 }
@@ -83,17 +125,10 @@ function sendSearch(){
 </script>
 <body>
 <div class="search-container" style="width:95%;" >
-
-		
-				
+	
 				<input name="search" id="search_input" class="w3-input w3-border w3-show-inline-block" type="text" style="width: 40%" placeholder="Search something">
 				<button class="w3-btn w3-teal w3-border w3-show-inline-block" type="submit" onclick="sendSearch()"> <i class="fa fa-search"></i></button>
-					<input name="checkboxTweets" id="checkboxTweets" class="w3-check w3-show-inline" type="checkbox">
-					<label>Tweets</label>
-					<input name="checkboxUsers" id="checkboxUsers" class="w3-check w3-show-inline" type="checkbox">
-					<label>Users</label>
-		
-	
+					
 </div>
 </body>
 
@@ -105,7 +140,7 @@ function sendSearch(){
       
 		<div class="w3-bar w3-row w3-black">
 		<div class="w3-container w3-half" style="text-align:center;">
-			<a class="w3-button w3-block" onclick="openTab('SearchPosts')" >Tweets</a>
+			<a class="w3-button w3-block" onclick="openTab('SearchPosts')" >Posts</a>
 		 </div>
 		 <div class="w3-container w3-half" >
 		 	<a class="w3-button w3-block" onclick="openTab('SearchUsers')" >Users</a>
@@ -115,47 +150,40 @@ function sendSearch(){
 		</div>
 		
 		<div class="w3-container">
-		<div id="SearchPosts" class="w3-container" style = "color:black;">
-		   <h2  class="w3-text-grey w3-padding-16"> <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> ${BeanUser.profilename}</h2>
-
-                    <div class="w3-container">
-                        <h5 class="w3-opacity"><b>name </b></h5>
-                        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>name <span class="w3-tag w3-teal w3-round">  mail </span></h6>
-                        <span class="fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)">xiwei</span> 
-                        <hr>
-                    </div>
-		</div>
-		
-		<div id="SearchUsers" class="w3-container" style="display:none">
-		
-			<div class="w3-row ">
-			
-			  <div class="w3-container w3-half">
+				<div id="SearchPosts" class="w3-container" style = "color:black;">
 	
-				<ul class="w3-ul">
-				<div>Username:</div>
-		    	<li><label id="labe_username" class="w3-text-grey"></label></li>
-		    	
-		    	<div>Description:</div>
-		    	<li><label id="labe_description" class="w3-text-grey">Description: </label></li>
-		 		 </ul>
-	
-			  	</div>
-			  	<div class="w3-container w3-half">
-	
-			  	<img id=user_profile class= "image-cropper" src="" >
-	
-			  </div>
-			</div>
-                   
-
-		</div>
+				</div>
 				
+				<div id="SearchUsers" class="w3-container" style="display:none">
+				
+				<ul class="w3-ul w3-card-4">
+
+
+				</ul>
+		
+				</div>
+
 		</div>
 		
     </div>
   </div>
 
+		<div  id="notfoundimage" style="display:none;">
+		  <img class="image-cropper" src="https://png.icons8.com/small/1600/nothing-found.png" > 
+		  <h2 class="w3-center"><font color="black">Nothing found</font></h2>
+		</div>
+  
+  
+		
+	  <li id="search_user" class="w3-bar" style="display:none;">
+	    <img src="images/profile.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+	    <div class="w3-bar-item">
+	      <span class="w3-large fake-link"  style="text-decoration: underline; color:blue;" onclick="showProfile(this)"></span>
+	      <span>Web Designer</span>
+	    </div>
+	  </li>
+	  
+	  
 
 
 
