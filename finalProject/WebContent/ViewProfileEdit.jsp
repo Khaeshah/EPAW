@@ -27,8 +27,7 @@ $(document).ready(function(){
 		<div class="w3-row ">
 		  <div class="w3-container w3-half ">
 		  	<p>
-			<label class="w3-text-grey">Username</label>
-			<textarea class="w3-input w3-border " name="user" id="userNameEdit" style="resize:none">a</textarea>
+			<textarea class="w3-input w3-border " name="user" id="userNameEdit" style="display:none">a</textarea>
 			</p>
 			<p>      
 			<label class="w3-text-grey">Description</label>

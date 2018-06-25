@@ -44,14 +44,15 @@ public class EditUserController extends HttpServlet {
 		
 		RequestDispatcher dispatcher = null;
 		   try {
-
 			   BeanUtils.populate(user, request.getParameterMap());			   
 			   // Aprofito el camp phonenumber ja que la final no el fem servir i no hi ha temps per fer refactor
 			   String oldUsername = user.getPhoneNumber().toString();
+			   //String newUsername = user.getUser().toString();
 			   dispatcher = request.getRequestDispatcher("ViewUserEditDone.jsp");
 			   if(user.getUser() != "") {
 				   // Editem usuari amb els nous parametres
-				   UserUtils.UpdateUserFromName(oldUsername,user.getUrl(), user.getDescription(), user.getUser());
+				   UserUtils.UpdateUserFromName(oldUsername,user.getUrl(), user.getDescription(), oldUsername);
+				   //PostUtils.editPostUsernameFromUser(oldUsername,newUsername);
 			   }
 			   
 			   

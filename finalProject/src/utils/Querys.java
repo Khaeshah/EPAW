@@ -45,6 +45,9 @@ public class Querys {
     public static String UpdateUserFromName(String username, String url, String description, String newUsername){
     	return "UPDATE user SET profilename ='"+newUsername+"', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
     }
+    public static String UpdateUserFromNameFull(String username, String url, String description, String newUsername){
+    	return "UPDATE user SET profilename ='"+newUsername+"', authorname = '" + newUsername + "', url ='"+url+"', description ='"+description+"' WHERE username ='"+username+"';";
+    }
     
 
     //follow 
@@ -61,6 +64,11 @@ public class Querys {
     public static String updatePostFromId(Integer id, String title, String content, String date){
     	return "UPDATE post SET title = '"+ title +"', content ='" + content + "', time = '"+ date +"' WHERE id ='" + id +"';";
     }
+    
+    public static String editPostsUsernameFromUser(String oldUsername, String newUsername){
+    	return "UPDATE post SET author = '"+ newUsername + "' WHERE author ='" + oldUsername +"';";
+    }    
+    
     // post 
     public static String insertPost(String author, String title, String content, String eventTime, String place, String time, String interest, Boolean is_public){
         return "INSERT INTO Post (author, title, content, eventTime, place, time, interest, is_public) VALUES ('"+ author + "', '" + title + "','" + content + "','"+ eventTime+ "','"+place+"','"+time+"','"+ interest+ "'," + is_public +");";
@@ -112,7 +120,7 @@ public class Querys {
     public static String deletePostsFromUser(String userToDelete){
         return "DELETE FROM Post WHERE author = '"+ userToDelete +"';";
     }
-
+    
     public static String deleteFollow(String user1 , String user2){
         return "DELETE FROM follow WHERE user1 = '"+ user1 +"' and user2 = '"+user2+"';";
     }
