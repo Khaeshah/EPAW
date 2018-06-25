@@ -41,23 +41,18 @@ public class EditUserController extends HttpServlet {
 		
 		BeanUser user = new BeanUser();
 		HttpSession session = request.getSession();
-		//String userToEdit = request.getParameter("content").toString();
-		//String desc = request.getParameter("desc").toString();
-		//String imageSrc = request.getParameter("img").toString();
+		
 		RequestDispatcher dispatcher = null;
 		   try {
-			   BeanUtils.populate(user, request.getParameterMap());
-			   System.out.println(user.getUser());
-			   System.out.println(user.getDescription());
-			   System.out.println(user.getUrl());
-			   
-			   
+
+			   BeanUtils.populate(user, request.getParameterMap());			   
+			   // Aprofito el camp phonenumber ja que la final no el fem servir i no hi ha temps per fer refactor
+			   String oldUsername = user.getPhoneNumber().toString();
 			   dispatcher = request.getRequestDispatcher("ViewUserEditDone.jsp");
-			   //if(userToEdit != "") {
-				   // Editem l'usuari amb els posts que ha fet
-				   //UserUtils.deleteUser(userToDelete);
-				   //PostUtils.deletePostsFromUser(userToDelete);
-			   //}
+			   if(user.getUser() != "") {
+				   // Editem usuari amb els nous parametres
+				   UserUtils.UpdateUserFromName(oldUsername,user.getUrl(), user.getDescription(), user.getUser());
+			   }
 			   
 			   
 			   dispatcher.forward(request, response);

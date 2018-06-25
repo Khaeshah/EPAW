@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     <div class="w3-modal-content">
         <form  id="EditProfileForm" class="w3-container w3-card-4" action="EditUserController" >
-        <span onclick="document.getElementById('profile_modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <span onclick="document.getElementById('edit_profile_modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 		<br>
 		<p>
 		
@@ -38,12 +38,14 @@ $(document).ready(function(){
 		    <label class="w3-text-grey">Image url </label>
 		    <textarea class="w3-input w3-border " name="url" id="imageSrcEdit" style="resize:none"></textarea>
 		    </p>
-
+			<p>
+		    <textarea class="w3-input w3-border " name="phoneNumber" id="phoneNumberEdit" style="display:none"></textarea>
+		    </p>
 			<p> <input class="w3-button w3-black" name="submit" type="submit" value="save"> </p>
 			
 		  </div>
 		  <div class="w3-container w3-half">
-		  	<img class= "image-cropper" src="${userinfo.url}" width="200" height="200">
+		  	<img class= "image-cropper" id=imageSrcEditShow width="200" height="200">
 		  </div>
 		</div>
       </form>
