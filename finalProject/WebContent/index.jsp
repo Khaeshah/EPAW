@@ -153,6 +153,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	   <jsp:include page="ViewProfile.jsp"/>
 	   
 	   <jsp:include page="ViewUserProfile.jsp"/>
+	   <jsp:include page="ViewProfileEdit.jsp"/>
 	   <jsp:include page="ViewPost.jsp"/>
 	
       	<div id="Posts"  class="w3-container w3-card w3-white w3-margin-bottom">

@@ -45,6 +45,21 @@ function deleteUser(event){
 	$('#wrapper').load('DeleteUserController',{userDel: userToDelete})	
 }
 
+function editUser(event){
+	
+
+	
+	
+	userNameToEdit = document.getElementById("labe_username").innerHTML;
+	description = document.getElementById("labe_description").innerHTML;
+	imageUrl = document.getElementById("user_profile").src;
+	document.getElementById("userNameEdit").innerText = userNameToEdit;
+	document.getElementById("descriptionEdit").innerText = description;
+	document.getElementById("imageSrcEdit").innerText = imageUrl;
+	$('#edit_profile_modal').show();
+	//$('#wrapper').load('EditUserController',{content: userNameToEdit, desc:description, img:imageUrl});	
+}
+
 
 </script>
 
@@ -72,6 +87,8 @@ function deleteUser(event){
 		  	
 		  	<button id="followbutoon" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="follow(this);">Follow</button>
 			<c:if test="${userinfo.is_admin eq true}">
+				<button id="editUserButton" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="editUser(this);">Edit User</button>
+			
 				<button id="deleteButton" class="w3-btn w3-teal w3-round-xlarge w3-center w3-show-inline-block " onclick="deleteUser(this);">Delete User</button>
 			</c:if>
 		  	<img id=user_profile class= "image-cropper" src="" >

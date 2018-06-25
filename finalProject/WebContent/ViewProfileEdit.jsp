@@ -6,19 +6,20 @@
 <script>
 
 $(document).ready(function(){
-    $("#ProfileForm").validate({
+    $("#EditProfileForm").validate({
     	submitHandler: function(form) {
-    		$("#wrapper").load('ProfileController',$("#ProfileForm").serialize());
+    		$("#wrapper").load('EditUserController',$("#EditProfileForm").serialize());
     }
     });
 });
 
+
 </script>
 
-<div id="profile_modal" class="w3-modal">
+<div id="edit_profile_modal" class="w3-modal">
 
     <div class="w3-modal-content">
-        <form  id="ProfileForm" class="w3-container w3-card-4" action="ProfileController" >
+        <form  id="EditProfileForm" class="w3-container w3-card-4" action="EditUserController" >
         <span onclick="document.getElementById('profile_modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 		<br>
 		<p>
@@ -27,15 +28,15 @@ $(document).ready(function(){
 		  <div class="w3-container w3-half ">
 		  	<p>
 			<label class="w3-text-grey">Username</label>
-			<textarea class="w3-input w3-border " name="user" style="resize:none">${userinfo.profilename}</textarea>
+			<textarea class="w3-input w3-border " name="user" id="userNameEdit" style="resize:none"></textarea>
 			</p>
 			<p>      
 			<label class="w3-text-grey">Description</label>
-			<textarea class="w3-input w3-border" name="description" style="resize:none">${userinfo.description}</textarea>
+			<textarea class="w3-input w3-border" name="description" id="descriptionEdit" style="resize:none"></textarea>
 			</p>
 			<p>
 		    <label class="w3-text-grey">Image url </label>
-		    <textarea class="w3-input w3-border " name="url" style="resize:none">${userinfo.url}</textarea>
+		    <textarea class="w3-input w3-border " name="url" id="imageSrcEdit" style="resize:none"></textarea>
 		    </p>
 
 			<p> <input class="w3-button w3-black" name="submit" type="submit" value="save"> </p>

@@ -13,10 +13,10 @@ function giveLikeToComment(){
 <body>
 <div class="search-container" style="width:95%;" >
 
-	<form id="giveLike" action="LikesController" class= "w3-padding-5">
-		<input type="image" name="submitLike" id="submitLike" src="images/heart.png" value= "${param.postId}" onclick="giveLikeToComment(${param.postId})" style="width: 20px; height: 20px">
-		<input type="hidden" id="submitLikeHide" name="submitLikeHide" value="${param.postId}">
-		<input type="hidden" id="addLike" name="addLike" value="true">
+	<form id="giveLike${param.postId}" action="LikesController" class= "w3-padding-5">
+		<input type="image" name="submitLike" id="submitLike${param.postId}" src="images/heart.png" value= "${param.postId}" onclick="giveLikeToComment(${param.postId})" style="width: 20px; height: 20px">
+		<input type="hidden" id="submitLikeHide${param.postId}" name="submitLikeHide" value="${param.postId}">
+		<input type="hidden" id="addLike${param.postId}" name="addLike" value="true">
 
 	</form>
 
