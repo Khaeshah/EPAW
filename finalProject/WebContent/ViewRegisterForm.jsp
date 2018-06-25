@@ -8,8 +8,9 @@ $(document).ready(function(){
     		
     		var test = validatePassword();
     		if(test) {
-    			$('#content').load('RegisterController',$("#registerForm").serialize());
+    			$('#wrapper').load('RegisterController',$("#registerForm").serialize());
     		}
+    		
     }
     });
 });

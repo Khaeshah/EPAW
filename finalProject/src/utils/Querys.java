@@ -103,7 +103,7 @@ public class Querys {
     
     public static String  getAllPostsByFollow(String follower){
 
-        return "SELECT * FROM POST where author in (SELECT user2 FROM follow where user1 = '"+follower+"');";
+        return "SELECT * FROM Post where author in (SELECT user2 FROM follow where user1 = '"+follower+"');";
     }
 
 

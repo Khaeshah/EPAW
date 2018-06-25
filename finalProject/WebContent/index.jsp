@@ -256,10 +256,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			me = document.getElementById("user_name").innerText;
 		}
 	
-		if (event.innerHTML === me || me === "")
+		
+		if(event.innerHTML === me)
+			console.log(event.innerHTML);
+			console.log(me);
+		
+
+		
+		if (event.innerHTML === me || me === ""){
+			console.log(document.getElementById("followbutoon"))
 			document.getElementById("followbutoon").style.display="none";
-		else 
-			{document.getElementById("followbutoon").style.display="inline";}
+			console.log(document.getElementById("followbutoon"))
+			console.log("case1");
+		}
+			
+		else {
+			console.log("case2");
+			document.getElementById("followbutoon").style.display="inline";
+		}
 		
 		
 		$.post(url,{user1:me, content:event.innerHTML},

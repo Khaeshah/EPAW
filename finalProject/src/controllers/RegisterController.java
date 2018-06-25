@@ -46,7 +46,8 @@ public class RegisterController extends HttpServlet {
 		   if (user.isComplete()) {
 			   UserUtils.insertUser(user.getUser(),user.getMail(),user.getPassword());
 			   System.out.println("User: " + user.getUser() + " inserted.");
-			   response.getWriter().append(HtmlUtils.buildResponseForm(UserUtils.getUsers()));
+			   //response.getWriter().append(HtmlUtils.buildResponseForm(UserUtils.getUsers()));
+			   response.sendRedirect("/finalProject/MainController");
 		   
 		   } 
 		   else {
