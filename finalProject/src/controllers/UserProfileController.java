@@ -132,8 +132,6 @@ public class UserProfileController extends HttpServlet {
 						stringBuilder.append(",");
 						stringBuilder.append("\"place\""+":\""+allPosts.getString("place")+"\"");
 						stringBuilder.append(",");
-						stringBuilder.append("\"likes\""+":\""+allPosts.getInt("likes")+"\"");
-						stringBuilder.append(",");
 						stringBuilder.append("\"time\""+":\""+allPosts.getString("time")+"\"");
 						stringBuilder.append(",");
 						stringBuilder.append("\"interest\""+":\""+allPosts.getString("interest")+"\"");

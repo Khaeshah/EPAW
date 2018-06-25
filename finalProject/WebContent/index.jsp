@@ -259,6 +259,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 			document.getElementById("followbutoon").style.display="none";
 		else 
 			{document.getElementById("followbutoon").style.display="inline";}
+		
+		
 		$.post(url,{user1:me, content:event.innerHTML},
 			function(response){
 
