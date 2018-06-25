@@ -26,7 +26,7 @@ $(document).ready(function(){
 		<div class="w3-row ">
 		  <div class="w3-container w3-half ">
 		  	<p>
-			<label class="w3-text-grey">username</label>
+			<label class="w3-text-grey">Username</label>
 			<textarea class="w3-input w3-border " name="user" style="resize:none">${userinfo.profilename}</textarea>
 			</p>
 			<p>      
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			<textarea class="w3-input w3-border" name="description" style="resize:none">${userinfo.description}</textarea>
 			</p>
 			<p>
-		    <label class="w3-text-grey">image url </label>
+		    <label class="w3-text-grey">Image url </label>
 		    <textarea class="w3-input w3-border " name="url" style="resize:none">${userinfo.url}</textarea>
 		    </p>
 

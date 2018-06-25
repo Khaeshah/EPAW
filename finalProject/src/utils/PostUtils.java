@@ -91,6 +91,12 @@ public class PostUtils {
         DAO dao = new DAO();
     	dao.execute(Querys.deletePostsFromUser(userToDelete));
     }
+    
+    public static void editPostUsernameFromUser(String oldUsername, String newUsername) throws Exception {
+        DAO dao = new DAO();
+    	dao.execute(Querys.editPostsUsernameFromUser(oldUsername,newUsername));
+    }
+   
 
     public static ResultSet getAllPostsByFollow(String follower) throws Exception {
     	DAO dao = new DAO();

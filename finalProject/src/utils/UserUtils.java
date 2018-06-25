@@ -63,6 +63,12 @@ public class UserUtils {
     	dao.execute((Querys.UpdateUserFromName(username, url, description , newUsername)));
     	
     }
+    public static void UpdateUserFromNameFull(String username, String url, String description, String newUsername) throws Exception {
+    	DAO dao = new DAO();
+    	
+    	dao.execute((Querys.UpdateUserFromNameFull(username, url, description , newUsername)));
+    	
+    }
 
     //follow
     
