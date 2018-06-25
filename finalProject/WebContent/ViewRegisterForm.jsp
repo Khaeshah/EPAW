@@ -34,7 +34,7 @@ else {
 
 	<div class="w3-section">   
 	
-		<label>Usarname</label>   
+		<label>Username</label>   
         <input type="text" id="username_input" class="w3-input required" placeholder="Username" name="user" value="<%=user.getUser() %>" required minlength="5"></input>
         
     </div>

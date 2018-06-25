@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 <form  class="w3-container" id="loginForm" action="" method="POST" style="color:rgb(0, 102, 153);">
 <div class="w3-section">      
-<label>Usarname</label> 
+<label>Username</label> 
 <input  type="text" name="user" value="${login.user}" id="user" class=" w3-input required" placeholder="Username" minlength="5"/> </td> 
 </div>
 <c:if test="${login.error[0] == 1}">
