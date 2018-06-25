@@ -49,13 +49,15 @@ function editUser(event){
 	
 
 	
-	
+	// Agafo el contingut del usuari i el carrego al formulari per poder editarlo
 	userNameToEdit = document.getElementById("labe_username").innerHTML;
 	description = document.getElementById("labe_description").innerHTML;
 	imageUrl = document.getElementById("user_profile").src;
+	// Els camps que ens interessen son carregats
 	document.getElementById("userNameEdit").innerText = userNameToEdit;
 	document.getElementById("descriptionEdit").innerText = description;
 	document.getElementById("imageSrcEdit").innerText = imageUrl;
+	
 	$('#edit_profile_modal').show();
 	//$('#wrapper').load('EditUserController',{content: userNameToEdit, desc:description, img:imageUrl});	
 }

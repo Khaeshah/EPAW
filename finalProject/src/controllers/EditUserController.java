@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanPost;
+import models.BeanUser;
 import utils.PostUtils;
 import utils.Querys;
 import utils.UserUtils;
@@ -38,18 +39,27 @@ public class EditUserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
-		String userToEdit = request.getParameter("content").toString();
-		String desc = request.getParameter("desc").toString();
-		String imageSrc = request.getParameter("img").toString();
+		BeanUser user = new BeanUser();
+		HttpSession session = request.getSession();
+		//String userToEdit = request.getParameter("content").toString();
+		//String desc = request.getParameter("desc").toString();
+		//String imageSrc = request.getParameter("img").toString();
 		RequestDispatcher dispatcher = null;
 		   try {
-			   dispatcher = request.getRequestDispatcher("ViewUserDeleteDone.jsp");
-			   if(userToEdit != "") {
+			   BeanUtils.populate(user, request.getParameterMap());
+			   System.out.println(user.getUser());
+			   System.out.println(user.getDescription());
+			   System.out.println(user.getUrl());
+			   
+			   
+			   dispatcher = request.getRequestDispatcher("ViewUserEditDone.jsp");
+			   //if(userToEdit != "") {
 				   // Editem l'usuari amb els posts que ha fet
 				   //UserUtils.deleteUser(userToDelete);
 				   //PostUtils.deletePostsFromUser(userToDelete);
-			   }
+			   //}
+			   
+			   
 			   dispatcher.forward(request, response);
 		   } catch (Exception exception) {
 				if(dispatcher != null){
